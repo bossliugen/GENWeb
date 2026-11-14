@@ -3,19 +3,29 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>我的網站開發展示 | Project Showcase</title>
+  <title>HIBOSSGEN | 網站開發與數位作品集</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Noto+Sans+TC:wght@400;500;600&family=Noto+Serif+TC:wght@500;600;700&display=swap"
+    rel="stylesheet"
+  />
   <style>
     :root {
-      --bg: #070b16;
-      --surface: rgba(17, 24, 46, 0.72);
-      --surface-solid: #11182e;
-      --border: rgba(255, 255, 255, 0.11);
-      --text: #eef2ff;
-      --muted: #94a3b8;
-      --accent: #6366f1;
-      --accent-2: #22d3ee;
-      --private: #f59e0b;
-      --radius: 16px;
+      --bg: #F6F3EC;
+      --sand: #EBE6DC;
+      --card: #FFFFFF;
+      --ink: #1C1917;
+      --stone: #57534E;
+      --forest: #1B4332;
+      --forest-hover: #143326;
+      --sage: #E7EFEA;
+      --border: #DFD9CE;
+      --danger: #991B1B;
+      --radius-card: 16px;
+      --radius-pill: 9999px;
+      --font-serif: "Noto Serif TC", Georgia, serif;
+      --font-sans: "Inter", "Noto Sans TC", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     }
 
     * {
@@ -25,141 +35,83 @@
     }
 
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans TC", Roboto, sans-serif;
-      background: var(--bg);
-      color: var(--text);
+      font-family: var(--font-sans);
+      background-color: var(--bg);
+      color: var(--ink);
       min-height: 100vh;
-      line-height: 1.6;
-      overflow-x: hidden;
-      position: relative;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
     }
 
-    #bg-canvas {
-      position: fixed;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 0;
-      pointer-events: none;
-    }
-
-    .aurora {
-      position: fixed;
-      inset: -20%;
-      z-index: 0;
-      pointer-events: none;
-      filter: blur(80px);
-      opacity: 0.45;
-      background:
-        radial-gradient(circle at 20% 25%, rgba(99, 102, 241, 0.45), transparent 40%),
-        radial-gradient(circle at 80% 20%, rgba(34, 211, 238, 0.3), transparent 38%),
-        radial-gradient(circle at 55% 85%, rgba(168, 85, 247, 0.28), transparent 42%);
-      animation: auroraDrift 18s ease-in-out infinite alternate;
-    }
-
-    @keyframes auroraDrift {
-      0% { transform: translate3d(0, 0, 0) scale(1); }
-      50% { transform: translate3d(-2%, 2%, 0) scale(1.05); }
-      100% { transform: translate3d(2%, -1.5%, 0) scale(1.02); }
+    .page-shell {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
     }
 
     .container {
-      position: relative;
-      z-index: 1;
-      max-width: 1080px;
+      width: 100%;
+      max-width: 1040px;
       margin: 0 auto;
-      padding: 36px 20px 72px;
+      padding: 0 24px;
     }
 
-    header {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      align-items: center;
-      gap: 18px;
-      padding-bottom: 28px;
+    /* 頂部導覽列 */
+    .topbar {
       border-bottom: 1px solid var(--border);
-      margin-bottom: 40px;
-      animation: fadeSlideDown 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
+      background-color: var(--bg);
     }
 
-    .status-pill {
+    .topbar-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 20px 0;
+    }
+
+    .brand-link {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      font-size: 0.78rem;
-      color: #a5f3fc;
-      background: rgba(34, 211, 238, 0.1);
-      border: 1px solid rgba(34, 211, 238, 0.28);
-      padding: 4px 11px;
-      border-radius: 999px;
-      margin-bottom: 10px;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--ink);
+      font-family: var(--font-serif);
+      font-size: 1.25rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
     }
 
-    .status-dot {
-      width: 7px;
-      height: 7px;
+    .brand-dot {
+      width: 8px;
+      height: 8px;
       border-radius: 50%;
-      background: #22d3ee;
-      box-shadow: 0 0 10px #22d3ee;
-      animation: pulseDot 2s ease-in-out infinite;
+      background-color: var(--forest);
+      flex-shrink: 0;
     }
 
-    @keyframes pulseDot {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.45; transform: scale(0.8); }
-    }
-
-    .brand h1 {
-      font-size: clamp(1.6rem, 3vw, 2.2rem);
-      font-weight: 800;
-      letter-spacing: -0.02em;
-      background: linear-gradient(120deg, #ffffff 0%, #a5b4fc 45%, #67e8f9 100%);
-      background-size: 200% auto;
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      animation: textShimmer 7s linear infinite;
-    }
-
-    @keyframes textShimmer {
-      0% { background-position: 0% center; }
-      100% { background-position: 200% center; }
-    }
-
-    .brand p {
-      color: var(--muted);
-      font-size: 0.96rem;
-      margin-top: 6px;
-    }
-
+    /* 按鈕樣式（膠囊圓角） */
     .btn {
-      position: relative;
-      overflow: hidden;
       display: inline-flex;
       align-items: center;
+      justify-content: center;
       gap: 8px;
-      padding: 10px 16px;
-      border-radius: 11px;
+      padding: 10px 20px;
+      border-radius: var(--radius-pill);
       border: 1px solid var(--border);
-      background: var(--surface);
-      backdrop-filter: blur(10px);
-      color: var(--text);
+      background-color: var(--card);
+      color: var(--ink);
+      font-family: var(--font-sans);
       font-size: 0.9rem;
       font-weight: 500;
       cursor: pointer;
       text-decoration: none;
-      transition: transform 0.18s ease, border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+      transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
     }
 
     .btn:hover {
-      transform: translateY(-1px);
-      border-color: rgba(255, 255, 255, 0.26);
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.28);
-    }
-
-    .btn:active {
-      transform: translateY(0);
+      background-color: var(--sand);
+      border-color: #CFC7B8;
     }
 
     .btn:disabled {
@@ -167,185 +119,184 @@
       cursor: not-allowed;
     }
 
-    .btn-primary {
-      background: linear-gradient(135deg, #6366f1, #4f46e5);
-      border-color: rgba(165, 180, 252, 0.35);
-      color: #fff;
+    .btn-forest {
+      background-color: var(--forest);
+      border-color: var(--forest);
+      color: #FFFFFF;
     }
 
-    .btn-primary::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(110deg, transparent 30%, rgba(255, 255, 255, 0.22) 50%, transparent 70%);
-      transform: translateX(-120%);
-      transition: transform 0.55s ease;
+    .btn-forest:hover:not(:disabled) {
+      background-color: var(--forest-hover);
+      border-color: var(--forest-hover);
+      color: #FFFFFF;
     }
 
-    .btn-primary:hover:not(:disabled)::after {
-      transform: translateX(120%);
+    .btn-subtle {
+      background-color: transparent;
+      border-color: var(--border);
+      color: var(--stone);
     }
 
-    .btn-private {
-      border-color: rgba(245, 158, 11, 0.38);
-      color: #fcd34d;
+    .btn-subtle:hover {
+      background-color: var(--sand);
+      color: var(--ink);
     }
 
-    .btn-private:hover {
-      background: rgba(245, 158, 11, 0.14);
-      border-color: rgba(245, 158, 11, 0.7);
-      box-shadow: 0 0 22px rgba(245, 158, 11, 0.2);
+    /* 主視覺簡介區 */
+    main {
+      flex: 1;
+      padding: 56px 0 80px;
     }
 
+    .hero {
+      padding-bottom: 44px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 48px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      border-radius: var(--radius-pill);
+      background-color: var(--sage);
+      color: var(--forest);
+      font-size: 0.84rem;
+      font-weight: 500;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 {
+      font-family: var(--font-serif);
+      font-size: clamp(1.9rem, 3.6vw, 2.75rem);
+      font-weight: 700;
+      line-height: 1.3;
+      color: var(--ink);
+      max-width: 700px;
+      margin-bottom: 14px;
+    }
+
+    .hero p {
+      color: var(--stone);
+      font-size: 1.05rem;
+      max-width: 600px;
+    }
+
+    /* 區塊標題 */
     .section-header {
       display: flex;
+      flex-wrap: wrap;
       justify-content: space-between;
       align-items: baseline;
-      margin-bottom: 18px;
       gap: 12px;
+      margin-bottom: 22px;
     }
 
     .section-header h2 {
-      font-size: 1.2rem;
+      font-family: var(--font-serif);
+      font-size: 1.4rem;
       font-weight: 600;
+      color: var(--ink);
     }
 
-    .section-header span {
-      color: var(--muted);
-      font-size: 0.85rem;
+    .section-meta {
+      color: var(--stone);
+      font-size: 0.9rem;
     }
 
+    /* 專案卡片網格 */
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 20px;
-      perspective: 900px;
+      grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+      gap: 24px;
     }
 
     .card {
-      position: relative;
-      background: var(--surface);
-      backdrop-filter: blur(14px);
+      background-color: var(--card);
       border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 22px;
+      border-radius: var(--radius-card);
+      padding: 28px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      gap: 18px;
-      overflow: hidden;
-      transform-style: preserve-3d;
-      transition: transform 0.22s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.22s ease, box-shadow 0.22s ease;
-      animation: cardEnter 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
-      animation-delay: var(--delay, 0ms);
-    }
-
-    .card::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(
-        340px circle at var(--mx, 50%) var(--my, 50%),
-        rgba(99, 102, 241, 0.18),
-        transparent 65%
-      );
-      opacity: 0;
-      transition: opacity 0.25s ease;
-      pointer-events: none;
-    }
-
-    .card:hover::before {
-      opacity: 1;
+      gap: 24px;
+      transition: border-color 0.2s ease, transform 0.2s ease;
     }
 
     .card:hover {
-      border-color: rgba(129, 140, 248, 0.55);
-      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.42);
-    }
-
-    .card.private-card {
-      border-color: rgba(245, 158, 11, 0.32);
-    }
-
-    .card.private-card::before {
-      background: radial-gradient(
-        340px circle at var(--mx, 50%) var(--my, 50%),
-        rgba(245, 158, 11, 0.18),
-        transparent 65%
-      );
-    }
-
-    .card.private-card:hover {
-      border-color: rgba(245, 158, 11, 0.7);
+      border-color: #BDB3A2;
+      transform: translateY(-2px);
     }
 
     .card-top {
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
-      gap: 10px;
+      gap: 12px;
+      margin-bottom: 12px;
     }
 
     .card-title {
-      font-size: 1.1rem;
+      font-family: var(--font-serif);
+      font-size: 1.2rem;
       font-weight: 600;
+      line-height: 1.45;
+      color: var(--ink);
     }
 
-    .tag {
-      font-size: 0.75rem;
-      padding: 3px 10px;
-      border-radius: 999px;
-      background: rgba(99, 102, 241, 0.18);
-      border: 1px solid rgba(129, 140, 248, 0.3);
-      color: #c7d2fe;
+    .chip {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: var(--radius-pill);
+      background-color: var(--sage);
+      color: var(--forest);
+      font-size: 0.78rem;
+      font-weight: 500;
       white-space: nowrap;
+      flex-shrink: 0;
     }
 
-    .tag.private-tag {
-      background: rgba(245, 158, 11, 0.16);
-      border-color: rgba(245, 158, 11, 0.35);
-      color: #fcd34d;
+    .chip-sand {
+      background-color: var(--sand);
+      color: var(--stone);
     }
 
     .card-desc {
-      color: var(--muted);
-      font-size: 0.9rem;
-      margin-top: 8px;
+      color: var(--stone);
+      font-size: 0.95rem;
     }
 
     .card-actions {
       display: flex;
-      gap: 10px;
       flex-wrap: wrap;
-      position: relative;
-      z-index: 1;
+      gap: 10px;
     }
 
     .card-actions .btn {
-      padding: 8px 14px;
-      font-size: 0.85rem;
+      padding: 9px 18px;
+      font-size: 0.88rem;
     }
 
+    /* 解鎖後的私人區塊 */
     #private-section {
       display: none;
-      margin-bottom: 42px;
-      padding: 24px;
-      border-radius: var(--radius);
-      background: rgba(245, 158, 11, 0.06);
-      border: 1px solid rgba(245, 158, 11, 0.32);
-      backdrop-filter: blur(12px);
+      margin-bottom: 48px;
+      padding: 28px;
+      border-radius: var(--radius-card);
+      background-color: var(--sand);
+      border: 1px solid var(--border);
     }
 
     #private-section.active {
       display: block;
-      animation: fadeSlideDown 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
     }
 
+    /* 密碼對話框 */
     .modal-backdrop {
       position: fixed;
       inset: 0;
-      background: rgba(4, 7, 15, 0.72);
-      backdrop-filter: blur(8px);
+      background-color: rgba(28, 25, 23, 0.45);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -353,7 +304,7 @@
       z-index: 100;
       opacity: 0;
       visibility: hidden;
-      transition: opacity 0.22s ease, visibility 0.22s ease;
+      transition: opacity 0.2s ease, visibility 0.2s ease;
     }
 
     .modal-backdrop.open {
@@ -364,71 +315,55 @@
     .modal {
       width: 100%;
       max-width: 420px;
-      background: var(--surface-solid);
+      background-color: var(--card);
       border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 24px;
-      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6);
-      transform: translateY(14px) scale(0.96);
-      transition: transform 0.26s cubic-bezier(0.22, 1, 0.36, 1);
+      border-radius: var(--radius-card);
+      padding: 28px;
+      transform: translateY(8px);
+      transition: transform 0.22s ease;
     }
 
     .modal-backdrop.open .modal {
-      transform: translateY(0) scale(1);
-    }
-
-    .modal.shake {
-      animation: shakeX 0.38s ease;
-    }
-
-    @keyframes shakeX {
-      0%, 100% { transform: translateX(0); }
-      20% { transform: translateX(-8px); }
-      40% { transform: translateX(8px); }
-      60% { transform: translateX(-5px); }
-      80% { transform: translateX(5px); }
+      transform: translateY(0);
     }
 
     .modal h3 {
-      font-size: 1.15rem;
-      margin-bottom: 6px;
+      font-family: var(--font-serif);
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 8px;
     }
 
     .modal p {
-      color: var(--muted);
-      font-size: 0.88rem;
-      margin-bottom: 16px;
+      color: var(--stone);
+      font-size: 0.92rem;
+      margin-bottom: 18px;
     }
 
-    .input-group {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      margin-bottom: 14px;
-    }
-
-    input[type="password"] {
+    .input-field {
       width: 100%;
-      padding: 11px 14px;
-      border-radius: 10px;
+      padding: 12px 16px;
+      border-radius: var(--radius-pill);
       border: 1px solid var(--border);
-      background: rgba(7, 11, 22, 0.9);
-      color: var(--text);
+      background-color: var(--bg);
+      color: var(--ink);
+      font-family: var(--font-sans);
       font-size: 0.95rem;
       outline: none;
-      transition: border-color 0.18s ease, box-shadow 0.18s ease;
+      margin-bottom: 12px;
+      transition: border-color 0.2s ease;
     }
 
-    input[type="password"]:focus {
-      border-color: var(--private);
-      box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.18);
+    .input-field:focus {
+      border-color: var(--forest);
     }
 
     .error-msg {
-      color: #fca5a5;
-      font-size: 0.85rem;
+      color: var(--danger);
+      font-size: 0.86rem;
       min-height: 20px;
-      margin-bottom: 10px;
+      margin-bottom: 14px;
     }
 
     .modal-actions {
@@ -437,101 +372,95 @@
       gap: 10px;
     }
 
+    /* 頁尾 */
     footer {
-      margin-top: 64px;
-      padding-top: 20px;
+      background-color: var(--sand);
       border-top: 1px solid var(--border);
-      color: var(--muted);
-      font-size: 0.85rem;
+      padding: 28px 0;
+      color: var(--stone);
+      font-size: 0.88rem;
+    }
+
+    .footer-inner {
       display: flex;
-      justify-content: space-between;
       flex-wrap: wrap;
-      gap: 10px;
-    }
-
-    @keyframes fadeSlideDown {
-      from { opacity: 0; transform: translateY(-14px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes cardEnter {
-      from { opacity: 0; transform: translateY(18px) scale(0.98); }
-      to { opacity: 1; transform: translateY(0) scale(1); }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
-        animation: none !important;
-        transition: none !important;
-      }
-      #bg-canvas {
-        display: none;
-      }
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
     }
   </style>
 </head>
 <body>
-  <div class="aurora" aria-hidden="true"></div>
-  <canvas id="bg-canvas" aria-hidden="true"></canvas>
-
-  <div class="container">
-    <header>
-      <div class="brand">
-        <div class="status-pill">
-          <span class="status-dot"></span>
-          <span>Live on GitHub Pages</span>
-        </div>
-        <h1>我的網站開發展示</h1>
-        <p>這裡收錄了我開發的公開網站與線上資料庫</p>
+  <div class="page-shell">
+    <header class="topbar">
+      <div class="container topbar-inner">
+        <a class="brand-link" href="#">
+          <span class="brand-dot" aria-hidden="true"></span>
+          <span>HIBOSSGEN</span>
+        </a>
+        <button id="open-private-btn" class="btn btn-subtle" type="button">
+          私人入口
+        </button>
       </div>
-      <button id="open-private-btn" class="btn btn-private" type="button">
-        🔒 私人入口
-      </button>
     </header>
 
-    <!-- 輸入密碼解密後才會顯示的私人網站區塊 -->
-    <section id="private-section" aria-live="polite">
-      <div class="section-header">
-        <h2>🔓 私人未公開網站</h2>
-        <button id="lock-private-btn" class="btn" type="button">鎖定並隱藏</button>
-      </div>
-      <div id="private-grid" class="grid"></div>
-    </section>
+    <main>
+      <div class="container">
+        <section class="hero">
+          <div class="hero-badge">
+            <span class="brand-dot" aria-hidden="true"></span>
+            <span>網站開發與資料整理</span>
+          </div>
+          <h1>把複雜的資料整理成<br />好讀、好用的日常工具</h1>
+          <p>這裡收錄了 HIBOSSGEN 公開分享的網站與資料庫專案；未公開的個人實驗空間則可透過右上角私人入口進入。</p>
+        </section>
 
-    <!-- 公開網站展示區塊 -->
-    <section>
-      <div class="section-header">
-        <h2>🌐 公開網站專案</h2>
-        <span id="public-count"></span>
+        <!-- 輸入密碼解密後才會顯示的私人網站區塊 -->
+        <section id="private-section" aria-live="polite">
+          <div class="section-header">
+            <h2>私人空間</h2>
+            <button id="lock-private-btn" class="btn" type="button">鎖定並隱藏</button>
+          </div>
+          <div id="private-grid" class="grid"></div>
+        </section>
+
+        <!-- 公開網站展示區塊 -->
+        <section>
+          <div class="section-header">
+            <h2>公開網站專案</h2>
+            <span id="public-count" class="section-meta"></span>
+          </div>
+          <div id="public-grid" class="grid"></div>
+        </section>
       </div>
-      <div id="public-grid" class="grid"></div>
-    </section>
+    </main>
 
     <footer>
-      <span>Hosted on GitHub Pages</span>
-      <span>私人網站清單已使用 AES-GCM 加密保護</span>
+      <div class="container footer-inner">
+        <span>HIBOSSGEN</span>
+        <span>私人入口採用瀏覽器端加密保護</span>
+      </div>
     </footer>
   </div>
 
-  <!-- 密碼輸入 Modal -->
+  <!-- 密碼輸入視窗 -->
   <div id="password-modal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="modal-title">
-    <div id="modal-box" class="modal">
-      <h3 id="modal-title">🔒 進入私人網站清單</h3>
-      <p>請輸入密碼以解密並顯示私人未公開網站連結。</p>
+    <div class="modal">
+      <h3 id="modal-title">進入私人空間</h3>
+      <p>請輸入密碼，驗證後將顯示未公開的網站連結。</p>
       <form id="unlock-form">
-        <div class="input-group">
-          <input
-            id="password-input"
-            type="password"
-            placeholder="請輸入密碼..."
-            autocomplete="current-password"
-            required
-          />
-        </div>
+        <input
+          id="password-input"
+          class="input-field"
+          type="password"
+          placeholder="請輸入密碼"
+          autocomplete="current-password"
+          required
+        />
         <div id="unlock-error" class="error-msg"></div>
         <div class="modal-actions">
           <button id="cancel-modal-btn" class="btn" type="button">取消</button>
-          <button id="submit-unlock-btn" class="btn btn-primary" type="submit">解鎖</button>
+          <button id="submit-unlock-btn" class="btn btn-forest" type="submit">解鎖</button>
         </div>
       </form>
     </div>
@@ -543,8 +472,8 @@
       {
         name: "台灣中古車實價趨勢與世代資料庫",
         url: "https://bossliugen.github.io/Used_Cars9918/",
-        description: "提供台灣中古車實價趨勢查詢與各車型世代資料庫。",
-        tag: "Database"
+        description: "整理台灣中古車市場的實價走勢與各車型世代演進，方便買賣與研究時快速對照。",
+        tag: "資料庫"
       }
     ];
 
@@ -555,43 +484,23 @@
       data: "PUXAqxjDwtezW7yfQcV1R6VdVKVMFe/qadyT1wZjAoIBc3HGgZOQEJ+wW84ua6kBiOYOllAEkBfYQJJqIYV2mU9vKz6hgVT57xjaE+mVFdb3lebnB3WLAJRNovs7cwQ0Kj0DiZNfk7ORAChE2wMs45UGoWsN9ST3optaSsXLqstjCURXBAPtJIEo/WFHLsg5XPfaJLrg+cCDc5vtwLyhv12mpQJJPHglAD0F5ThAbtSV5Fs="
     };
 
-    function attachCardInteractiveEffects(card) {
-      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-
-      card.addEventListener("mousemove", (e) => {
-        const rect = card.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        card.style.setProperty("--mx", `${x}px`);
-        card.style.setProperty("--my", `${y}px`);
-
-        const rotateY = ((x / rect.width) - 0.5) * 6;
-        const rotateX = (0.5 - (y / rect.height)) * 6;
-        card.style.transform = `translateY(-4px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-      });
-
-      card.addEventListener("mouseleave", () => {
-        card.style.transform = "";
-      });
-    }
-
-    function createSiteCard(site, isPrivate = false, index = 0) {
+    function createSiteCard(site, isPrivate = false) {
       const card = document.createElement("article");
-      card.className = isPrivate ? "card private-card" : "card";
-      card.style.setProperty("--delay", `${index * 80}ms`);
+      card.className = "card";
 
+      const content = document.createElement("div");
       const top = document.createElement("div");
       top.className = "card-top";
 
       const title = document.createElement("h3");
       title.className = "card-title";
-      title.textContent = site.name || "未命名網站";
+      title.textContent = site.name || "未命名專案";
       top.appendChild(title);
 
       if (site.tag) {
         const tag = document.createElement("span");
-        tag.className = isPrivate ? "tag private-tag" : "tag";
-        tag.textContent = site.tag;
+        tag.className = isPrivate ? "chip chip-sand" : "chip";
+        tag.textContent = isPrivate ? "私人空間" : site.tag;
         top.appendChild(tag);
       }
 
@@ -599,20 +508,19 @@
       desc.className = "card-desc";
       desc.textContent = site.description || "";
 
-      const body = document.createElement("div");
-      body.appendChild(top);
-      body.appendChild(desc);
+      content.appendChild(top);
+      content.appendChild(desc);
 
       const actions = document.createElement("div");
       actions.className = "card-actions";
 
       if (site.url) {
         const visitLink = document.createElement("a");
-        visitLink.className = "btn btn-primary";
+        visitLink.className = "btn btn-forest";
         visitLink.href = site.url;
         visitLink.target = "_blank";
         visitLink.rel = "noopener noreferrer";
-        visitLink.textContent = "開啟網站 ↗";
+        visitLink.textContent = "前往網站";
         actions.appendChild(visitLink);
       }
 
@@ -626,9 +534,8 @@
         actions.appendChild(repoLink);
       }
 
-      card.appendChild(body);
+      card.appendChild(content);
       card.appendChild(actions);
-      attachCardInteractiveEffects(card);
       return card;
     }
 
@@ -636,10 +543,10 @@
       const grid = document.getElementById("public-grid");
       const count = document.getElementById("public-count");
       grid.innerHTML = "";
-      PUBLIC_SITES.forEach((site, idx) => {
-        grid.appendChild(createSiteCard(site, false, idx));
+      PUBLIC_SITES.forEach((site) => {
+        grid.appendChild(createSiteCard(site, false));
       });
-      count.textContent = `共 ${PUBLIC_SITES.length} 個專案`;
+      count.textContent = `目前收錄 ${PUBLIC_SITES.length} 項公開專案`;
     }
 
     function fromBase64(b64) {
@@ -653,7 +560,7 @@
 
     async function decryptPrivateSites(password) {
       if (!window.crypto || !window.crypto.subtle) {
-        throw new Error("目前瀏覽環境不支援 Web Crypto API（請透過 GitHub Pages https:// 開啟）。");
+        throw new Error("目前瀏覽環境不支援加密解密功能，請透過安全連線開啟。");
       }
 
       const enc = new TextEncoder();
@@ -688,7 +595,6 @@
     }
 
     const modal = document.getElementById("password-modal");
-    const modalBox = document.getElementById("modal-box");
     const openBtn = document.getElementById("open-private-btn");
     const cancelBtn = document.getElementById("cancel-modal-btn");
     const lockBtn = document.getElementById("lock-private-btn");
@@ -703,19 +609,13 @@
       errorEl.textContent = "";
       passwordInput.value = "";
       modal.classList.add("open");
-      setTimeout(() => passwordInput.focus(), 80);
+      setTimeout(() => passwordInput.focus(), 60);
     }
 
     function closeModal() {
       modal.classList.remove("open");
       passwordInput.value = "";
       errorEl.textContent = "";
-    }
-
-    function triggerModalShake() {
-      modalBox.classList.remove("shake");
-      void modalBox.offsetWidth;
-      modalBox.classList.add("shake");
     }
 
     openBtn.addEventListener("click", openModal);
@@ -733,119 +633,29 @@
       e.preventDefault();
       errorEl.textContent = "";
       submitBtn.disabled = true;
-      submitBtn.textContent = "解密中...";
+      submitBtn.textContent = "驗證中";
 
       try {
         const sites = await decryptPrivateSites(passwordInput.value);
         privateGrid.innerHTML = "";
-        sites.forEach((site, idx) => {
-          privateGrid.appendChild(createSiteCard(site, true, idx));
+        sites.forEach((site) => {
+          privateGrid.appendChild(createSiteCard(site, true));
         });
         privateSection.classList.add("active");
         closeModal();
       } catch (err) {
-        if (err && err.message && err.message.includes("Web Crypto")) {
+        if (err && err.message && err.message.includes("加密解密")) {
           errorEl.textContent = err.message;
         } else {
-          errorEl.textContent = "密碼錯誤，無法解密私人網站資料。";
+          errorEl.textContent = "密碼不正確，請重新確認。";
         }
-        triggerModalShake();
       } finally {
         submitBtn.disabled = false;
         submitBtn.textContent = "解鎖";
       }
     });
 
-    function initParticleCanvas() {
-      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-      const canvas = document.getElementById("bg-canvas");
-      const ctx = canvas.getContext("2d");
-      if (!ctx) return;
-
-      let width = 0;
-      let height = 0;
-      const mouse = { x: -9999, y: -9999 };
-      const particles = [];
-
-      function resize() {
-        width = canvas.width = window.innerWidth;
-        height = canvas.height = window.innerHeight;
-      }
-
-      window.addEventListener("resize", resize);
-      window.addEventListener("mousemove", (e) => {
-        mouse.x = e.clientX;
-        mouse.y = e.clientY;
-      });
-      window.addEventListener("mouseleave", () => {
-        mouse.x = -9999;
-        mouse.y = -9999;
-      });
-
-      resize();
-      const count = Math.min(55, Math.max(24, Math.floor((width * height) / 26000)));
-      for (let i = 0; i < count; i++) {
-        particles.push({
-          x: Math.random() * width,
-          y: Math.random() * height,
-          vx: (Math.random() - 0.5) * 0.45,
-          vy: (Math.random() - 0.5) * 0.45,
-          r: Math.random() * 1.6 + 1
-        });
-      }
-
-      function tick() {
-        ctx.clearRect(0, 0, width, height);
-
-        for (let i = 0; i < particles.length; i++) {
-          const p = particles[i];
-          p.x += p.vx;
-          p.y += p.vy;
-
-          if (p.x < 0 || p.x > width) p.vx *= -1;
-          if (p.y < 0 || p.y > height) p.vy *= -1;
-
-          ctx.beginPath();
-          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-          ctx.fillStyle = "rgba(165, 180, 252, 0.55)";
-          ctx.fill();
-
-          for (let j = i + 1; j < particles.length; j++) {
-            const q = particles[j];
-            const dx = p.x - q.x;
-            const dy = p.y - q.y;
-            const dist = Math.hypot(dx, dy);
-            if (dist < 130) {
-              ctx.beginPath();
-              ctx.moveTo(p.x, p.y);
-              ctx.lineTo(q.x, q.y);
-              ctx.strokeStyle = `rgba(99, 102, 241, ${(1 - dist / 130) * 0.22})`;
-              ctx.lineWidth = 1;
-              ctx.stroke();
-            }
-          }
-
-          const mdx = p.x - mouse.x;
-          const mdy = p.y - mouse.y;
-          const mdist = Math.hypot(mdx, mdy);
-          if (mdist < 160) {
-            ctx.beginPath();
-            ctx.moveTo(p.x, p.y);
-            ctx.lineTo(mouse.x, mouse.y);
-            ctx.strokeStyle = `rgba(34, 211, 238, ${(1 - mdist / 160) * 0.35})`;
-            ctx.lineWidth = 1;
-            ctx.stroke();
-          }
-        }
-
-        requestAnimationFrame(tick);
-      }
-
-      tick();
-    }
-
     renderPublicSites();
-    initParticleCanvas();
   </script>
 </body>
 </html>
