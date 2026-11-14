@@ -53,38 +53,53 @@
       padding: 0 24px;
     }
 
-    /* 1. 極簡頂部導覽列（橫幅 LOGO 置中 + 右側聯繫） */
+    /* 1. 原生 HTML/CSS 頂部橫幅導覽列（透明底色、無色差矩形） */
     header {
-      display: grid;
-      grid-template-columns: 1fr auto 1fr;
+      display: flex;
       align-items: center;
-      gap: 16px;
-      padding: 22px 0;
-      border-bottom: 1px solid var(--border);
+      gap: 24px;
+      padding: 28px 0;
+      background: transparent;
     }
 
-    .header-spacer {
-      display: block;
+    .banner-line-group {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      min-width: 0;
+    }
+
+    .banner-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 9999px;
+      background-color: var(--forest);
+      flex-shrink: 0;
+    }
+
+    .banner-hairline {
+      height: 1px;
+      flex: 1;
+      background-color: var(--border);
     }
 
     .wordmark {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
+      font-family: var(--font-serif);
+      font-size: clamp(1.5rem, 2.5vw, 1.875rem);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      line-height: 1;
+      color: var(--ink);
       text-decoration: none;
+      flex-shrink: 0;
     }
 
-    .brand-logo {
-      height: 46px;
-      width: auto;
-      max-width: 100%;
-      object-fit: contain;
-      display: block;
-      mix-blend-mode: multiply;
+    .wordmark-dot {
+      color: var(--forest);
     }
 
     .contact-trigger {
-      justify-self: end;
       background: none;
       border: none;
       font-family: var(--font-sans);
@@ -92,22 +107,8 @@
       color: var(--stone);
       cursor: pointer;
       padding: 4px 2px;
-      text-decoration: none;
-    }
-
-    @media (max-width: 680px) {
-      header {
-        grid-template-columns: 1fr auto;
-      }
-      .header-spacer {
-        display: none;
-      }
-      .wordmark {
-        justify-content: flex-start;
-      }
-      .brand-logo {
-        height: 36px;
-      }
+      flex-shrink: 0;
+      transition: color 150ms ease;
     }
 
     .contact-trigger:hover {
@@ -120,31 +121,33 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
-      padding: 64px 0;
+      padding: 56px 0 64px;
     }
 
     /* 2. 置中品牌宣言 */
     .statement {
       text-align: center;
-      max-width: 600px;
-      margin: 0 auto 48px;
+      max-width: 620px;
+      margin: 0 auto 52px;
     }
 
     .statement h1 {
       font-family: var(--font-serif);
-      font-size: clamp(1.75rem, 3.4vw, 2.4rem);
+      font-size: clamp(1.75rem, 3.4vw, 2.35rem);
       font-weight: 600;
-      line-height: 1.35;
+      line-height: 1.38;
       color: var(--ink);
       margin-bottom: 14px;
+      text-wrap: balance;
     }
 
     .statement p {
       font-size: 1rem;
       color: var(--stone);
+      text-wrap: balance;
     }
 
-    /* 3. 公開入口卡片（雙欄並排） */
+    /* 3. 公開入口卡片（雙欄並排，無內框圖示） */
     .gateways {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -160,7 +163,7 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      gap: 24px;
+      gap: 28px;
       transition: border-color 150ms ease;
     }
 
@@ -168,31 +171,19 @@
       border-color: var(--border-hover);
     }
 
-    .card-logo-wrap {
-      width: 72px;
-      height: 72px;
-      border-radius: 14px;
-      border: 1px solid var(--border);
-      background-color: #FFFFFF;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-      margin-bottom: 18px;
-    }
-
-    .card-logo {
-      width: 100%;
-      height: 100%;
+    .card-icon {
+      width: 48px;
+      height: 48px;
       object-fit: contain;
-      padding: 6px;
       display: block;
+      margin-bottom: 18px;
     }
 
     .card h2 {
       font-family: var(--font-serif);
-      font-size: 1.28rem;
+      font-size: 1.25rem;
       font-weight: 600;
+      line-height: 1.4;
       color: var(--ink);
       margin-bottom: 10px;
     }
@@ -220,18 +211,25 @@
     }
 
     @media (max-width: 680px) {
+      header {
+        gap: 14px;
+        padding: 22px 0;
+      }
+      .banner-line-group {
+        gap: 12px;
+      }
       .gateways {
         grid-template-columns: 1fr;
       }
       main {
-        padding: 44px 0;
+        padding: 40px 0 48px;
       }
       .card {
         padding: 26px;
       }
     }
 
-    /* 4. 極簡單行頁尾 + 低調工程模式入口 */
+    /* 4. 極簡單行頁尾 */
     footer {
       border-top: 1px solid var(--border);
       padding: 22px 0;
@@ -412,28 +410,29 @@
 </head>
 <body>
   <div class="shell">
-    <!-- 1. 極簡頂部導覽列 -->
+    <!-- 1. 原生 HTML/CSS 頂部橫幅導覽列 -->
     <header>
-      <span class="header-spacer" aria-hidden="true"></span>
-      <a class="wordmark" href="#" aria-label="HIBOSS GEN.">
-        <img src="banner-logo.png" alt="GEN." class="brand-logo" />
-      </a>
+      <div class="banner-line-group">
+        <span class="banner-dot" aria-hidden="true"></span>
+        <span class="banner-hairline" aria-hidden="true"></span>
+        <a class="wordmark" href="#" aria-label="HIBOSS GEN.">GEN<span class="wordmark-dot">.</span></a>
+        <span class="banner-hairline" aria-hidden="true"></span>
+        <span class="banner-dot" aria-hidden="true"></span>
+      </div>
       <button id="open-contact-btn" class="contact-trigger" type="button">聯繫</button>
     </header>
 
-    <!-- 2. 置中品牌宣言 & 3. 公開入口卡片 -->
+    <!-- 2. 置中品牌宣言 & 3. 兩張並排入口卡片 -->
     <main>
       <section class="statement">
-        <h1>安靜整理資訊，做出真正實用的工具</h1>
+        <h1>安靜整理資訊，<br />做出真正實用的工具</h1>
         <p>GEN. 代表對數據與日常工具的長期打磨，把繁雜的公開資料收斂成清晰的入口。</p>
       </section>
 
       <section class="gateways" aria-label="入口">
         <article class="card">
           <div>
-            <div class="card-logo-wrap">
-              <img src="used-cars-logo.jpg" alt="台灣中古車實價趨勢與世代資料庫" class="card-logo" />
-            </div>
+            <img src="used-cars-logo.jpg" alt="台灣中古車實價趨勢與世代資料庫" class="card-icon" />
             <h2>台灣中古車實價趨勢與世代資料庫</h2>
             <p>彙整台灣中古車實價走勢與車型世代沿革，提供買賣研究時清晰的公開查價參考。</p>
           </div>
@@ -447,9 +446,7 @@
 
         <article class="card">
           <div>
-            <div class="card-logo-wrap">
-              <img src="f1-logo.jpg" alt="GEN. — F1 比賽資料與遙測分析" class="card-logo" />
-            </div>
+            <img src="f1-logo.jpg" alt="GEN. — F1 比賽資料與遙測分析" class="card-icon" />
             <h2>GEN. — F1 比賽資料與遙測分析</h2>
             <p>整理 F1 賽事數據、單圈遙測走勢與車手表現，提供賽後復盤與圈速比對的清晰視角。</p>
           </div>
@@ -463,7 +460,7 @@
       </section>
     </main>
 
-    <!-- 4. 極簡單行頁尾（最右側保留低調工程模式） -->
+    <!-- 4. 極簡單行頁尾 -->
     <footer>
       <span>© 2026 HIBOSS GEN. · 台灣</span>
       <div class="footer-links">
