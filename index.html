@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Noto+Sans+TC:wght@400;500&family=Noto+Serif+TC:wght@500;600;700&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&family=Noto+Sans+TC:wght@400;500;600&display=swap"
     rel="stylesheet"
   />
   <style>
@@ -22,8 +22,8 @@
       --border: #DFD9CE;
       --border-hover: #B8B0A2;
       --danger: #991B1B;
-      --font-serif: "Noto Serif TC", Georgia, serif;
-      --font-sans: "Inter", "Noto Sans TC", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --font-brand: "Instrument Serif", Georgia, serif;
+      --font-sans: "Inter", "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", -apple-system, BlinkMacSystemFont, sans-serif;
     }
 
     * {
@@ -85,10 +85,10 @@
     }
 
     .wordmark {
-      font-family: var(--font-serif);
-      font-size: clamp(1.5rem, 2.5vw, 1.875rem);
-      font-weight: 600;
-      letter-spacing: -0.02em;
+      font-family: var(--font-brand);
+      font-size: clamp(1.85rem, 3vw, 2.25rem);
+      font-weight: 400;
+      letter-spacing: 0.01em;
       line-height: 1;
       color: var(--ink);
       text-decoration: none;
@@ -132,10 +132,11 @@
     }
 
     .statement h1 {
-      font-family: var(--font-serif);
-      font-size: clamp(1.75rem, 3.4vw, 2.35rem);
+      font-family: var(--font-sans);
+      font-size: clamp(1.7rem, 3.3vw, 2.3rem);
       font-weight: 600;
-      line-height: 1.38;
+      letter-spacing: 0.03em;
+      line-height: 1.4;
       color: var(--ink);
       margin-bottom: 14px;
       text-wrap: balance;
@@ -180,10 +181,11 @@
     }
 
     .card h2 {
-      font-family: var(--font-serif);
-      font-size: 1.25rem;
+      font-family: var(--font-sans);
+      font-size: 1.2rem;
       font-weight: 600;
-      line-height: 1.4;
+      letter-spacing: 0.03em;
+      line-height: 1.45;
       color: var(--ink);
       margin-bottom: 10px;
     }
@@ -297,9 +299,10 @@
     }
 
     .modal h3 {
-      font-family: var(--font-serif);
-      font-size: 1.2rem;
+      font-family: var(--font-sans);
+      font-size: 1.15rem;
       font-weight: 600;
+      letter-spacing: 0.03em;
       margin-bottom: 8px;
     }
 
