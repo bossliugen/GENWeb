@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>HIBOSS GEN.</title>
+  <link rel="icon" type="image/jpeg" href="logo.jpg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
@@ -61,16 +62,17 @@
     }
 
     .wordmark {
-      font-family: var(--font-serif);
-      font-size: 1.2rem;
-      font-weight: 700;
-      letter-spacing: 0.04em;
-      color: var(--ink);
+      display: inline-flex;
+      align-items: center;
       text-decoration: none;
     }
 
-    .wordmark-dot {
-      color: var(--forest);
+    .brand-logo {
+      height: 44px;
+      width: auto;
+      display: block;
+      border-radius: 8px;
+      mix-blend-mode: multiply;
     }
 
     .contact-trigger {
@@ -386,7 +388,9 @@
   <div class="shell">
     <!-- 1. 極簡頂部導覽列 -->
     <header>
-      <a class="wordmark" href="#">HIBOSS GEN<span class="wordmark-dot">.</span></a>
+      <a class="wordmark" href="#" aria-label="HIBOSS GEN.">
+        <img src="logo.jpg" alt="GEN." class="brand-logo" />
+      </a>
       <button id="open-contact-btn" class="contact-trigger" type="button">聯繫</button>
     </header>
 
