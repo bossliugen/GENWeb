@@ -17,6 +17,7 @@
       --card: #FFFFFF;
       --ink: #1C1917;
       --stone: #57534E;
+      --muted: #8C857B;
       --forest: #1B4332;
       --border: #DFD9CE;
       --border-hover: #B8B0A2;
@@ -103,7 +104,7 @@
     .statement {
       text-align: center;
       max-width: 600px;
-      margin: 0 auto 52px;
+      margin: 0 auto 48px;
     }
 
     .statement h1 {
@@ -120,23 +121,15 @@
       color: var(--stone);
     }
 
-    /* 3. 兩張並排入口卡片 */
+    /* 3. 公開入口卡片 */
     .gateways {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 24px;
-    }
-
-    @media (max-width: 680px) {
-      .gateways {
-        grid-template-columns: 1fr;
-      }
-      main {
-        padding: 44px 0;
-      }
+      display: flex;
+      justify-content: center;
     }
 
     .card {
+      width: 100%;
+      max-width: 540px;
       background-color: var(--card);
       border: 1px solid var(--border);
       border-radius: 16px;
@@ -144,7 +137,7 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      gap: 28px;
+      gap: 24px;
       transition: border-color 150ms ease;
     }
 
@@ -152,9 +145,30 @@
       border-color: var(--border-hover);
     }
 
+    .card-logo-wrap {
+      width: 72px;
+      height: 72px;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      background-color: #FFFFFF;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      margin-bottom: 18px;
+    }
+
+    .card-logo {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      padding: 6px;
+      display: block;
+    }
+
     .card h2 {
       font-family: var(--font-serif);
-      font-size: 1.25rem;
+      font-size: 1.28rem;
       font-weight: 600;
       color: var(--ink);
       margin-bottom: 10px;
@@ -170,14 +184,10 @@
       align-items: center;
       gap: 6px;
       font-family: var(--font-sans);
-      font-size: 0.92rem;
+      font-size: 0.94rem;
       font-weight: 500;
       color: var(--forest);
       text-decoration: none;
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 0;
       align-self: flex-start;
     }
 
@@ -186,52 +196,16 @@
       text-underline-offset: 4px;
     }
 
-    .private-unlocked {
-      margin-top: 14px;
-      padding-top: 14px;
-      border-top: 1px solid var(--border);
-      display: none;
-      flex-direction: column;
-      gap: 8px;
+    @media (max-width: 680px) {
+      main {
+        padding: 44px 0;
+      }
+      .card {
+        padding: 26px;
+      }
     }
 
-    .private-unlocked.open {
-      display: flex;
-    }
-
-    .private-link-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-    }
-
-    .private-link-row a {
-      color: var(--forest);
-      font-weight: 500;
-      font-size: 0.92rem;
-      text-decoration: none;
-    }
-
-    .private-link-row a:hover {
-      text-decoration: underline;
-      text-underline-offset: 4px;
-    }
-
-    .lock-btn {
-      background: none;
-      border: none;
-      color: var(--stone);
-      font-size: 0.82rem;
-      cursor: pointer;
-      padding: 0;
-    }
-
-    .lock-btn:hover {
-      color: var(--ink);
-    }
-
-    /* 4. 極簡單行頁尾 */
+    /* 4. 極簡單行頁尾 + 低調工程模式入口 */
     footer {
       border-top: 1px solid var(--border);
       padding: 22px 0;
@@ -246,6 +220,7 @@
 
     .footer-links {
       display: flex;
+      align-items: center;
       gap: 18px;
     }
 
@@ -258,7 +233,21 @@
       color: var(--ink);
     }
 
-    /* 簡潔對話框（聯繫資訊 & 私人入口密碼） */
+    .footer-eng-btn {
+      background: none;
+      border: none;
+      font-family: var(--font-sans);
+      font-size: 0.8rem;
+      color: var(--muted);
+      cursor: pointer;
+      padding: 0;
+    }
+
+    .footer-eng-btn:hover {
+      color: var(--stone);
+    }
+
+    /* 對話框 */
     .modal-backdrop {
       position: fixed;
       inset: 0;
@@ -382,6 +371,17 @@
       color: var(--forest);
       font-size: 0.88rem;
     }
+
+    .unlocked-list {
+      display: none;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    .unlocked-list.open {
+      display: flex;
+    }
   </style>
 </head>
 <body>
@@ -394,16 +394,19 @@
       <button id="open-contact-btn" class="contact-trigger" type="button">聯繫</button>
     </header>
 
-    <!-- 2. 置中品牌宣言 & 3. 兩張入口卡片 -->
+    <!-- 2. 置中品牌宣言 & 3. 公開入口卡片 -->
     <main>
       <section class="statement">
         <h1>安靜整理資訊，做出真正實用的工具</h1>
-        <p>GEN. 代表對數據與日常工具的長期打磨，把繁雜的公開資料與個人專案收斂在這裡。</p>
+        <p>GEN. 代表對數據與日常工具的長期打磨，把繁雜的公開資料收斂成清晰的入口。</p>
       </section>
 
       <section class="gateways" aria-label="入口">
         <article class="card">
           <div>
+            <div class="card-logo-wrap">
+              <img src="used-cars-logo.jpg" alt="台灣中古車實價趨勢與世代資料庫" class="card-logo" />
+            </div>
             <h2>台灣中古車實價趨勢與世代資料庫</h2>
             <p>彙整台灣中古車實價走勢與車型世代沿革，提供買賣研究時清晰的公開查價參考。</p>
           </div>
@@ -414,24 +417,16 @@
             rel="noopener noreferrer"
           >進入平台 →</a>
         </article>
-
-        <article class="card">
-          <div>
-            <h2>私人空間</h2>
-            <p>僅供本人使用的未公開工具與測試環境，需輸入密碼解密後開啟連結。</p>
-            <div id="private-unlocked" class="private-unlocked"></div>
-          </div>
-          <button id="open-private-btn" class="card-action" type="button">輸入密碼 →</button>
-        </article>
       </section>
     </main>
 
-    <!-- 4. 極簡單行頁尾 -->
+    <!-- 4. 極簡單行頁尾（最右側保留低調工程模式） -->
     <footer>
       <span>© 2026 HIBOSS GEN. · 台灣</span>
       <div class="footer-links">
         <a href="https://discord.gg/NdPzar4YAC" target="_blank" rel="noopener noreferrer">Discord</a>
         <a href="https://www.instagram.com/gen_cryptocurrency?dlrf=OGkza3ZoYm82ZjFs" target="_blank" rel="noopener noreferrer">Instagram</a>
+        <button id="open-private-btn" class="footer-eng-btn" type="button">工程模式</button>
       </div>
     </footer>
   </div>
@@ -457,11 +452,12 @@
     </div>
   </div>
 
-  <!-- 私人空間密碼視窗 -->
+  <!-- 工程模式密碼視窗 -->
   <div id="password-modal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="pwd-title">
     <div class="modal">
-      <h3 id="pwd-title">進入私人空間</h3>
-      <p>請輸入密碼以解密並顯示私人網站連結。</p>
+      <h3 id="pwd-title">工程模式</h3>
+      <p id="pwd-desc">請輸入密碼以解密未公開的內部入口。</p>
+
       <form id="unlock-form">
         <input
           id="password-input"
@@ -477,6 +473,11 @@
           <button id="submit-pwd-btn" class="btn-pill btn-forest" type="submit">解鎖</button>
         </div>
       </form>
+
+      <div id="unlocked-view" class="unlocked-list"></div>
+      <div id="unlocked-actions" class="modal-actions" style="display: none;">
+        <button id="lock-close-btn" class="btn-pill" type="button">鎖定並關閉</button>
+      </div>
     </div>
   </div>
 
@@ -541,67 +542,68 @@
       if (e.target === contactModal) contactModal.classList.remove("open");
     });
 
-    // 私人空間密碼視窗
+    // 工程模式密碼視窗
     const pwdModal = document.getElementById("password-modal");
-    const openPrivateBtn = document.getElementById("open-private-btn");
-    const cancelPwdBtn = document.getElementById("cancel-pwd-btn");
-    const submitPwdBtn = document.getElementById("submit-pwd-btn");
+    const pwdDesc = document.getElementById("pwd-desc");
+    const unlockForm = document.getElementById("unlock-form");
+    const unlockedView = document.getElementById("unlocked-view");
+    const unlockedActions = document.getElementById("unlocked-actions");
     const passwordInput = document.getElementById("password-input");
+    const submitPwdBtn = document.getElementById("submit-pwd-btn");
     const errorEl = document.getElementById("unlock-error");
-    const unlockedBox = document.getElementById("private-unlocked");
 
-    function closePwdModal() {
+    function resetAndClosePwdModal() {
       pwdModal.classList.remove("open");
       passwordInput.value = "";
       errorEl.textContent = "";
+      unlockForm.style.display = "block";
+      pwdDesc.textContent = "請輸入密碼以解密未公開的內部入口。";
+      unlockedView.innerHTML = "";
+      unlockedView.classList.remove("open");
+      unlockedActions.style.display = "none";
     }
 
-    openPrivateBtn.addEventListener("click", () => {
-      errorEl.textContent = "";
-      passwordInput.value = "";
+    document.getElementById("open-private-btn").addEventListener("click", () => {
+      resetAndClosePwdModal();
       pwdModal.classList.add("open");
       setTimeout(() => passwordInput.focus(), 50);
     });
-    cancelPwdBtn.addEventListener("click", closePwdModal);
+    document.getElementById("cancel-pwd-btn").addEventListener("click", resetAndClosePwdModal);
+    document.getElementById("lock-close-btn").addEventListener("click", resetAndClosePwdModal);
     pwdModal.addEventListener("click", (e) => {
-      if (e.target === pwdModal) closePwdModal();
+      if (e.target === pwdModal) resetAndClosePwdModal();
     });
 
-    document.getElementById("unlock-form").addEventListener("submit", async (e) => {
+    unlockForm.addEventListener("submit", async (e) => {
       e.preventDefault();
       errorEl.textContent = "";
       submitPwdBtn.disabled = true;
 
       try {
         const sites = await decryptPrivateSites(passwordInput.value);
-        unlockedBox.innerHTML = "";
+        unlockedView.innerHTML = "";
         sites.forEach((site) => {
-          const row = document.createElement("div");
-          row.className = "private-link-row";
+          const item = document.createElement("a");
+          item.className = "contact-item";
+          item.href = site.url;
+          item.target = "_blank";
+          item.rel = "noopener noreferrer";
 
-          const link = document.createElement("a");
-          link.href = site.url;
-          link.target = "_blank";
-          link.rel = "noopener noreferrer";
-          link.textContent = `${site.name} →`;
+          const title = document.createElement("strong");
+          title.textContent = site.name;
+          const action = document.createElement("span");
+          action.textContent = "開啟 →";
 
-          const lockBtn = document.createElement("button");
-          lockBtn.className = "lock-btn";
-          lockBtn.type = "button";
-          lockBtn.textContent = "鎖定";
-          lockBtn.addEventListener("click", () => {
-            unlockedBox.innerHTML = "";
-            unlockedBox.classList.remove("open");
-            openPrivateBtn.style.display = "inline-flex";
-          });
-
-          row.appendChild(link);
-          row.appendChild(lockBtn);
-          unlockedBox.appendChild(row);
+          item.appendChild(title);
+          item.appendChild(action);
+          unlockedView.appendChild(item);
         });
-        unlockedBox.classList.add("open");
-        openPrivateBtn.style.display = "none";
-        closePwdModal();
+
+        unlockForm.style.display = "none";
+        pwdDesc.textContent = "已解鎖內部入口。";
+        unlockedView.classList.add("open");
+        unlockedActions.style.display = "flex";
+        passwordInput.value = "";
       } catch (err) {
         if (err && err.message && err.message.includes("加密解密")) {
           errorEl.textContent = err.message;
