@@ -34,7 +34,6 @@
       position: relative;
     }
 
-    /* 動態背景畫布與極光光暈 */
     #bg-canvas {
       position: fixed;
       inset: 0;
@@ -241,7 +240,6 @@
       animation-delay: var(--delay, 0ms);
     }
 
-    /* 滑鼠跟隨聚光燈 */
     .card::before {
       content: "";
       position: absolute;
@@ -343,7 +341,6 @@
       animation: fadeSlideDown 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
     }
 
-    /* Modal 動畫 */
     .modal-backdrop {
       position: fixed;
       inset: 0;
@@ -482,7 +479,7 @@
       <div class="brand">
         <div class="status-pill">
           <span class="status-dot"></span>
-          <span>Live Project Showcase</span>
+          <span>Live on GitHub Pages</span>
         </div>
         <h1>我的網站開發展示</h1>
         <p>這裡收錄了我開發的公開網站與線上資料庫</p>
@@ -492,7 +489,7 @@
       </button>
     </header>
 
-    <!-- 伺服器驗證後才會動態載入的私人網站區塊 -->
+    <!-- 輸入密碼解密後才會顯示的私人網站區塊 -->
     <section id="private-section" aria-live="polite">
       <div class="section-header">
         <h2>🔓 私人未公開網站</h2>
@@ -511,8 +508,8 @@
     </section>
 
     <footer>
-      <span>Project Showcase</span>
-      <span>私人入口採伺服器端密碼驗證</span>
+      <span>Hosted on GitHub Pages</span>
+      <span>私人網站清單已使用 AES-GCM 加密保護</span>
     </footer>
   </div>
 
@@ -520,7 +517,7 @@
   <div id="password-modal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="modal-title">
     <div id="modal-box" class="modal">
       <h3 id="modal-title">🔒 進入私人網站清單</h3>
-      <p>請輸入密碼，由伺服器驗證後取得私人網站連結。</p>
+      <p>請輸入密碼以解密並顯示私人未公開網站連結。</p>
       <form id="unlock-form">
         <div class="input-group">
           <input
@@ -550,6 +547,13 @@
         tag: "Database"
       }
     ];
+
+    // 私人網站清單已使用 PBKDF2 + AES-GCM 加密（原始碼內不含明文網址或密碼）
+    const ENCRYPTED_PRIVATE_DATA = {
+      salt: "r8tmgEFpReRbiy+mQbT+/Q==",
+      iv: "cbchKES+9uVWBHCj",
+      data: "PUXAqxjDwtezW7yfQcV1R6VdVKVMFe/qadyT1wZjAoIBc3HGgZOQEJ+wW84ua6kBiOYOllAEkBfYQJJqIYV2mU9vKz6hgVT57xjaE+mVFdb3lebnB3WLAJRNovs7cwQ0Kj0DiZNfk7ORAChE2wMs45UGoWsN9ST3optaSsXLqstjCURXBAPtJIEo/WFHLsg5XPfaJLrg+cCDc5vtwLyhv12mpQJJPHglAD0F5ThAbtSV5Fs="
+    };
 
     function attachCardInteractiveEffects(card) {
       if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
@@ -638,6 +642,51 @@
       count.textContent = `共 ${PUBLIC_SITES.length} 個專案`;
     }
 
+    function fromBase64(b64) {
+      const bin = atob(b64);
+      const bytes = new Uint8Array(bin.length);
+      for (let i = 0; i < bin.length; i++) {
+        bytes[i] = bin.charCodeAt(i);
+      }
+      return bytes;
+    }
+
+    async function decryptPrivateSites(password) {
+      if (!window.crypto || !window.crypto.subtle) {
+        throw new Error("目前瀏覽環境不支援 Web Crypto API（請透過 GitHub Pages https:// 開啟）。");
+      }
+
+      const enc = new TextEncoder();
+      const dec = new TextDecoder();
+      const salt = fromBase64(ENCRYPTED_PRIVATE_DATA.salt);
+      const iv = fromBase64(ENCRYPTED_PRIVATE_DATA.iv);
+      const cipherBytes = fromBase64(ENCRYPTED_PRIVATE_DATA.data);
+
+      const keyMaterial = await window.crypto.subtle.importKey(
+        "raw",
+        enc.encode(password),
+        "PBKDF2",
+        false,
+        ["deriveKey"]
+      );
+
+      const key = await window.crypto.subtle.deriveKey(
+        { name: "PBKDF2", salt, iterations: 100000, hash: "SHA-256" },
+        keyMaterial,
+        { name: "AES-GCM", length: 256 },
+        false,
+        ["decrypt"]
+      );
+
+      const plainBuffer = await window.crypto.subtle.decrypt(
+        { name: "AES-GCM", iv },
+        key,
+        cipherBytes
+      );
+
+      return JSON.parse(dec.decode(plainBuffer));
+    }
+
     const modal = document.getElementById("password-modal");
     const modalBox = document.getElementById("modal-box");
     const openBtn = document.getElementById("open-private-btn");
@@ -684,30 +733,22 @@
       e.preventDefault();
       errorEl.textContent = "";
       submitBtn.disabled = true;
-      submitBtn.textContent = "驗證中...";
+      submitBtn.textContent = "解密中...";
 
       try {
-        const res = await fetch("/api/unlock", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ password: passwordInput.value })
-        });
-        const data = await res.json();
-
-        if (!res.ok || !data.ok) {
-          errorEl.textContent = data.error || "驗證失敗。";
-          triggerModalShake();
-          return;
-        }
-
+        const sites = await decryptPrivateSites(passwordInput.value);
         privateGrid.innerHTML = "";
-        (data.sites || []).forEach((site, idx) => {
+        sites.forEach((site, idx) => {
           privateGrid.appendChild(createSiteCard(site, true, idx));
         });
         privateSection.classList.add("active");
         closeModal();
-      } catch {
-        errorEl.textContent = "無法連線到伺服器，請確認後端服務是否已啟動。";
+      } catch (err) {
+        if (err && err.message && err.message.includes("Web Crypto")) {
+          errorEl.textContent = err.message;
+        } else {
+          errorEl.textContent = "密碼錯誤，無法解密私人網站資料。";
+        }
         triggerModalShake();
       } finally {
         submitBtn.disabled = false;
@@ -715,7 +756,6 @@
       }
     });
 
-    // 背景粒子連線動畫
     function initParticleCanvas() {
       if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
       const canvas = document.getElementById("bg-canvas");
