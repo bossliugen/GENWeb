@@ -3,27 +3,23 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>HIBOSSGEN | 網站開發與數位作品集</title>
+  <title>HIBOSS GEN.</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Noto+Sans+TC:wght@400;500;600&family=Noto+Serif+TC:wght@500;600;700&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Noto+Sans+TC:wght@400;500&family=Noto+Serif+TC:wght@500;600;700&display=swap"
     rel="stylesheet"
   />
   <style>
     :root {
       --bg: #F6F3EC;
-      --sand: #EBE6DC;
       --card: #FFFFFF;
       --ink: #1C1917;
       --stone: #57534E;
       --forest: #1B4332;
-      --forest-hover: #143326;
-      --sage: #E7EFEA;
       --border: #DFD9CE;
+      --border-hover: #B8B0A2;
       --danger: #991B1B;
-      --radius-card: 16px;
-      --radius-pill: 9999px;
       --font-serif: "Noto Serif TC", Georgia, serif;
       --font-sans: "Inter", "Noto Sans TC", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     }
@@ -34,325 +30,282 @@
       padding: 0;
     }
 
+    html, body {
+      height: 100%;
+    }
+
     body {
       font-family: var(--font-sans);
       background-color: var(--bg);
       color: var(--ink);
-      min-height: 100vh;
       line-height: 1.7;
       -webkit-font-smoothing: antialiased;
     }
 
-    .page-shell {
+    .shell {
+      min-height: 100vh;
       display: flex;
       flex-direction: column;
-      min-height: 100vh;
-    }
-
-    .container {
-      width: 100%;
-      max-width: 1040px;
+      max-width: 960px;
       margin: 0 auto;
       padding: 0 24px;
     }
 
-    /* 頂部導覽列 */
-    .topbar {
-      border-bottom: 1px solid var(--border);
-      background-color: var(--bg);
-    }
-
-    .topbar-inner {
+    /* 1. 極簡頂部導覽列 */
+    header {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 16px;
-      padding: 20px 0;
+      padding: 28px 0;
+      border-bottom: 1px solid var(--border);
     }
 
-    .brand-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      text-decoration: none;
-      color: var(--ink);
+    .wordmark {
       font-family: var(--font-serif);
-      font-size: 1.25rem;
+      font-size: 1.2rem;
       font-weight: 700;
       letter-spacing: 0.04em;
-    }
-
-    .brand-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background-color: var(--forest);
-      flex-shrink: 0;
-    }
-
-    /* 按鈕樣式（膠囊圓角） */
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      padding: 10px 20px;
-      border-radius: var(--radius-pill);
-      border: 1px solid var(--border);
-      background-color: var(--card);
       color: var(--ink);
-      font-family: var(--font-sans);
-      font-size: 0.9rem;
-      font-weight: 500;
-      cursor: pointer;
       text-decoration: none;
-      transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
     }
 
-    .btn:hover {
-      background-color: var(--sand);
-      border-color: #CFC7B8;
+    .wordmark-dot {
+      color: var(--forest);
     }
 
-    .btn:disabled {
-      opacity: 0.6;
-      cursor: not-allowed;
-    }
-
-    .btn-forest {
-      background-color: var(--forest);
-      border-color: var(--forest);
-      color: #FFFFFF;
-    }
-
-    .btn-forest:hover:not(:disabled) {
-      background-color: var(--forest-hover);
-      border-color: var(--forest-hover);
-      color: #FFFFFF;
-    }
-
-    .btn-subtle {
-      background-color: transparent;
-      border-color: var(--border);
+    .contact-trigger {
+      background: none;
+      border: none;
+      font-family: var(--font-sans);
+      font-size: 0.92rem;
       color: var(--stone);
+      cursor: pointer;
+      padding: 4px 2px;
+      text-decoration: none;
     }
 
-    .btn-subtle:hover {
-      background-color: var(--sand);
+    .contact-trigger:hover {
       color: var(--ink);
     }
 
-    /* 主視覺簡介區 */
+    /* 主體置中留白 */
     main {
       flex: 1;
-      padding: 56px 0 80px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 64px 0;
     }
 
-    .hero {
-      padding-bottom: 44px;
-      border-bottom: 1px solid var(--border);
-      margin-bottom: 48px;
+    /* 2. 置中品牌宣言 */
+    .statement {
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto 52px;
     }
 
-    .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 6px 14px;
-      border-radius: var(--radius-pill);
-      background-color: var(--sage);
-      color: var(--forest);
-      font-size: 0.84rem;
-      font-weight: 500;
-      margin-bottom: 20px;
-    }
-
-    .hero h1 {
+    .statement h1 {
       font-family: var(--font-serif);
-      font-size: clamp(1.9rem, 3.6vw, 2.75rem);
-      font-weight: 700;
-      line-height: 1.3;
+      font-size: clamp(1.75rem, 3.4vw, 2.4rem);
+      font-weight: 600;
+      line-height: 1.35;
       color: var(--ink);
-      max-width: 700px;
       margin-bottom: 14px;
     }
 
-    .hero p {
+    .statement p {
+      font-size: 1rem;
       color: var(--stone);
-      font-size: 1.05rem;
-      max-width: 600px;
     }
 
-    /* 區塊標題 */
-    .section-header {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      align-items: baseline;
-      gap: 12px;
-      margin-bottom: 22px;
-    }
-
-    .section-header h2 {
-      font-family: var(--font-serif);
-      font-size: 1.4rem;
-      font-weight: 600;
-      color: var(--ink);
-    }
-
-    .section-meta {
-      color: var(--stone);
-      font-size: 0.9rem;
-    }
-
-    /* 專案卡片網格 */
-    .grid {
+    /* 3. 兩張並排入口卡片 */
+    .gateways {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 24px;
+    }
+
+    @media (max-width: 680px) {
+      .gateways {
+        grid-template-columns: 1fr;
+      }
+      main {
+        padding: 44px 0;
+      }
     }
 
     .card {
       background-color: var(--card);
       border: 1px solid var(--border);
-      border-radius: var(--radius-card);
-      padding: 28px;
+      border-radius: 16px;
+      padding: 32px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      gap: 24px;
-      transition: border-color 0.2s ease, transform 0.2s ease;
+      gap: 28px;
+      transition: border-color 150ms ease;
     }
 
     .card:hover {
-      border-color: #BDB3A2;
-      transform: translateY(-2px);
+      border-color: var(--border-hover);
     }
 
-    .card-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      gap: 12px;
-      margin-bottom: 12px;
-    }
-
-    .card-title {
-      font-family: var(--font-serif);
-      font-size: 1.2rem;
-      font-weight: 600;
-      line-height: 1.45;
-      color: var(--ink);
-    }
-
-    .chip {
-      display: inline-block;
-      padding: 4px 12px;
-      border-radius: var(--radius-pill);
-      background-color: var(--sage);
-      color: var(--forest);
-      font-size: 0.78rem;
-      font-weight: 500;
-      white-space: nowrap;
-      flex-shrink: 0;
-    }
-
-    .chip-sand {
-      background-color: var(--sand);
-      color: var(--stone);
-    }
-
-    .card-desc {
-      color: var(--stone);
-      font-size: 0.95rem;
-    }
-
-    .card-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-
-    .card-actions .btn {
-      padding: 9px 18px;
-      font-size: 0.88rem;
-    }
-
-    /* 解鎖後的私人區塊 */
-    #private-section {
-      display: none;
-      margin-bottom: 48px;
-      padding: 28px;
-      border-radius: var(--radius-card);
-      background-color: var(--sand);
-      border: 1px solid var(--border);
-    }
-
-    #private-section.active {
-      display: block;
-    }
-
-    /* 密碼對話框 */
-    .modal-backdrop {
-      position: fixed;
-      inset: 0;
-      background-color: rgba(28, 25, 23, 0.45);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-      z-index: 100;
-      opacity: 0;
-      visibility: hidden;
-      transition: opacity 0.2s ease, visibility 0.2s ease;
-    }
-
-    .modal-backdrop.open {
-      opacity: 1;
-      visibility: visible;
-    }
-
-    .modal {
-      width: 100%;
-      max-width: 420px;
-      background-color: var(--card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-card);
-      padding: 28px;
-      transform: translateY(8px);
-      transition: transform 0.22s ease;
-    }
-
-    .modal-backdrop.open .modal {
-      transform: translateY(0);
-    }
-
-    .modal h3 {
+    .card h2 {
       font-family: var(--font-serif);
       font-size: 1.25rem;
       font-weight: 600;
       color: var(--ink);
+      margin-bottom: 10px;
+    }
+
+    .card p {
+      font-size: 0.94rem;
+      color: var(--stone);
+    }
+
+    .card-action {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-sans);
+      font-size: 0.92rem;
+      font-weight: 500;
+      color: var(--forest);
+      text-decoration: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      align-self: flex-start;
+    }
+
+    .card-action:hover {
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
+
+    .private-unlocked {
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px solid var(--border);
+      display: none;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .private-unlocked.open {
+      display: flex;
+    }
+
+    .private-link-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .private-link-row a {
+      color: var(--forest);
+      font-weight: 500;
+      font-size: 0.92rem;
+      text-decoration: none;
+    }
+
+    .private-link-row a:hover {
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
+
+    .lock-btn {
+      background: none;
+      border: none;
+      color: var(--stone);
+      font-size: 0.82rem;
+      cursor: pointer;
+      padding: 0;
+    }
+
+    .lock-btn:hover {
+      color: var(--ink);
+    }
+
+    /* 4. 極簡單行頁尾 */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 22px 0;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.85rem;
+      color: var(--stone);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 18px;
+    }
+
+    .footer-links a {
+      color: var(--stone);
+      text-decoration: none;
+    }
+
+    .footer-links a:hover {
+      color: var(--ink);
+    }
+
+    /* 簡潔對話框（聯繫資訊 & 私人入口密碼） */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background-color: rgba(28, 25, 23, 0.4);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      z-index: 50;
+    }
+
+    .modal-backdrop.open {
+      display: flex;
+    }
+
+    .modal {
+      width: 100%;
+      max-width: 400px;
+      background-color: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 28px;
+    }
+
+    .modal h3 {
+      font-family: var(--font-serif);
+      font-size: 1.2rem;
+      font-weight: 600;
       margin-bottom: 8px;
     }
 
     .modal p {
+      font-size: 0.9rem;
       color: var(--stone);
-      font-size: 0.92rem;
       margin-bottom: 18px;
     }
 
     .input-field {
       width: 100%;
-      padding: 12px 16px;
-      border-radius: var(--radius-pill);
+      padding: 11px 14px;
       border: 1px solid var(--border);
+      border-radius: 10px;
       background-color: var(--bg);
-      color: var(--ink);
       font-family: var(--font-sans);
-      font-size: 0.95rem;
+      font-size: 0.94rem;
+      color: var(--ink);
       outline: none;
-      margin-bottom: 12px;
-      transition: border-color 0.2s ease;
+      margin-bottom: 10px;
+      transition: border-color 150ms ease;
     }
 
     .input-field:focus {
@@ -361,9 +314,9 @@
 
     .error-msg {
       color: var(--danger);
-      font-size: 0.86rem;
+      font-size: 0.85rem;
       min-height: 20px;
-      margin-bottom: 14px;
+      margin-bottom: 12px;
     }
 
     .modal-actions {
@@ -372,82 +325,139 @@
       gap: 10px;
     }
 
-    /* 頁尾 */
-    footer {
-      background-color: var(--sand);
-      border-top: 1px solid var(--border);
-      padding: 28px 0;
-      color: var(--stone);
+    .btn-pill {
+      padding: 8px 18px;
+      border-radius: 9999px;
+      border: 1px solid var(--border);
+      background-color: var(--card);
+      color: var(--ink);
+      font-family: var(--font-sans);
       font-size: 0.88rem;
+      cursor: pointer;
+      text-decoration: none;
+      transition: border-color 150ms ease;
     }
 
-    .footer-inner {
+    .btn-pill:hover {
+      border-color: var(--border-hover);
+    }
+
+    .btn-forest {
+      background-color: var(--forest);
+      border-color: var(--forest);
+      color: #FFFFFF;
+    }
+
+    .btn-forest:hover {
+      border-color: var(--forest);
+    }
+
+    .contact-list {
       display: flex;
-      flex-wrap: wrap;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    .contact-item {
+      display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 12px;
+      padding: 12px 14px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      text-decoration: none;
+      color: var(--ink);
+      font-size: 0.92rem;
+      transition: border-color 150ms ease;
+    }
+
+    .contact-item:hover {
+      border-color: var(--border-hover);
+    }
+
+    .contact-item span {
+      color: var(--forest);
+      font-size: 0.88rem;
     }
   </style>
 </head>
 <body>
-  <div class="page-shell">
-    <header class="topbar">
-      <div class="container topbar-inner">
-        <a class="brand-link" href="#">
-          <span class="brand-dot" aria-hidden="true"></span>
-          <span>HIBOSSGEN</span>
-        </a>
-        <button id="open-private-btn" class="btn btn-subtle" type="button">
-          私人入口
-        </button>
-      </div>
+  <div class="shell">
+    <!-- 1. 極簡頂部導覽列 -->
+    <header>
+      <a class="wordmark" href="#">HIBOSS GEN<span class="wordmark-dot">.</span></a>
+      <button id="open-contact-btn" class="contact-trigger" type="button">聯繫</button>
     </header>
 
+    <!-- 2. 置中品牌宣言 & 3. 兩張入口卡片 -->
     <main>
-      <div class="container">
-        <section class="hero">
-          <div class="hero-badge">
-            <span class="brand-dot" aria-hidden="true"></span>
-            <span>網站開發與資料整理</span>
-          </div>
-          <h1>把複雜的資料整理成<br />好讀、好用的日常工具</h1>
-          <p>這裡收錄了 HIBOSSGEN 公開分享的網站與資料庫專案；未公開的個人實驗空間則可透過右上角私人入口進入。</p>
-        </section>
+      <section class="statement">
+        <h1>安靜整理資訊，做出真正實用的工具</h1>
+        <p>GEN. 代表對數據與日常工具的長期打磨，把繁雜的公開資料與個人專案收斂在這裡。</p>
+      </section>
 
-        <!-- 輸入密碼解密後才會顯示的私人網站區塊 -->
-        <section id="private-section" aria-live="polite">
-          <div class="section-header">
+      <section class="gateways" aria-label="入口">
+        <article class="card">
+          <div>
+            <h2>台灣中古車實價趨勢與世代資料庫</h2>
+            <p>彙整台灣中古車實價走勢與車型世代沿革，提供買賣研究時清晰的公開查價參考。</p>
+          </div>
+          <a
+            class="card-action"
+            href="https://bossliugen.github.io/Used_Cars9918/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >進入平台 →</a>
+        </article>
+
+        <article class="card">
+          <div>
             <h2>私人空間</h2>
-            <button id="lock-private-btn" class="btn" type="button">鎖定並隱藏</button>
+            <p>僅供本人使用的未公開工具與測試環境，需輸入密碼解密後開啟連結。</p>
+            <div id="private-unlocked" class="private-unlocked"></div>
           </div>
-          <div id="private-grid" class="grid"></div>
-        </section>
-
-        <!-- 公開網站展示區塊 -->
-        <section>
-          <div class="section-header">
-            <h2>公開網站專案</h2>
-            <span id="public-count" class="section-meta"></span>
-          </div>
-          <div id="public-grid" class="grid"></div>
-        </section>
-      </div>
+          <button id="open-private-btn" class="card-action" type="button">輸入密碼 →</button>
+        </article>
+      </section>
     </main>
 
+    <!-- 4. 極簡單行頁尾 -->
     <footer>
-      <div class="container footer-inner">
-        <span>HIBOSSGEN</span>
-        <span>私人入口採用瀏覽器端加密保護</span>
+      <span>© 2026 HIBOSS GEN. · 台灣</span>
+      <div class="footer-links">
+        <a href="https://discord.gg/NdPzar4YAC" target="_blank" rel="noopener noreferrer">Discord</a>
+        <a href="https://www.instagram.com/gen_cryptocurrency?dlrf=OGkza3ZoYm82ZjFs" target="_blank" rel="noopener noreferrer">Instagram</a>
       </div>
     </footer>
   </div>
 
-  <!-- 密碼輸入視窗 -->
-  <div id="password-modal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+  <!-- 聯繫資訊視窗 -->
+  <div id="contact-modal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="contact-title">
     <div class="modal">
-      <h3 id="modal-title">進入私人空間</h3>
-      <p>請輸入密碼，驗證後將顯示未公開的網站連結。</p>
+      <h3 id="contact-title">聯繫方式</h3>
+      <p>歡迎透過以下社群管道交流與聯繫。</p>
+      <div class="contact-list">
+        <a class="contact-item" href="https://discord.gg/NdPzar4YAC" target="_blank" rel="noopener noreferrer">
+          <strong>Discord</strong>
+          <span>前往加入 →</span>
+        </a>
+        <a class="contact-item" href="https://www.instagram.com/gen_cryptocurrency?dlrf=OGkza3ZoYm82ZjFs" target="_blank" rel="noopener noreferrer">
+          <strong>Instagram</strong>
+          <span>前往追蹤 →</span>
+        </a>
+      </div>
+      <div class="modal-actions">
+        <button id="close-contact-btn" class="btn-pill" type="button">關閉</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 私人空間密碼視窗 -->
+  <div id="password-modal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="pwd-title">
+    <div class="modal">
+      <h3 id="pwd-title">進入私人空間</h3>
+      <p>請輸入密碼以解密並顯示私人網站連結。</p>
       <form id="unlock-form">
         <input
           id="password-input"
@@ -459,95 +469,19 @@
         />
         <div id="unlock-error" class="error-msg"></div>
         <div class="modal-actions">
-          <button id="cancel-modal-btn" class="btn" type="button">取消</button>
-          <button id="submit-unlock-btn" class="btn btn-forest" type="submit">解鎖</button>
+          <button id="cancel-pwd-btn" class="btn-pill" type="button">取消</button>
+          <button id="submit-pwd-btn" class="btn-pill btn-forest" type="submit">解鎖</button>
         </div>
       </form>
     </div>
   </div>
 
   <script>
-    // 公開網站清單（之後可隨時在這裡新增其他公開專案）
-    const PUBLIC_SITES = [
-      {
-        name: "台灣中古車實價趨勢與世代資料庫",
-        url: "https://bossliugen.github.io/Used_Cars9918/",
-        description: "整理台灣中古車市場的實價走勢與各車型世代演進，方便買賣與研究時快速對照。",
-        tag: "資料庫"
-      }
-    ];
-
-    // 私人網站清單已使用 PBKDF2 + AES-GCM 加密（原始碼內不含明文網址或密碼）
     const ENCRYPTED_PRIVATE_DATA = {
       salt: "246sNVy/hAn+cZ8U8a362Q==",
       iv: "kXdmXRiCrpdZnblC",
       data: "61IyFf0liryUwK2kcqVVKfL6k/5yaPmYIId1O4x8Mi5iiEIjj3hymKVFCZb/JyLPsiUGkt2aOPatUHVz8a/jRauCG185LVE2dac95exJ3fH8i1c9bxe+MZtzPdeq2JwZeGcQP7iwgbT/K2R6Tuwb8fExnwT5/+DOc6Kk7lP0dwDU/uBfmJGWLrBcPFxe3mCc6oJ0RY4+vSbGDwq8hTHwFu6LEu6EyagwrYGyOUWMa8OhNXQ="
     };
-
-    function createSiteCard(site, isPrivate = false) {
-      const card = document.createElement("article");
-      card.className = "card";
-
-      const content = document.createElement("div");
-      const top = document.createElement("div");
-      top.className = "card-top";
-
-      const title = document.createElement("h3");
-      title.className = "card-title";
-      title.textContent = site.name || "未命名專案";
-      top.appendChild(title);
-
-      if (site.tag) {
-        const tag = document.createElement("span");
-        tag.className = isPrivate ? "chip chip-sand" : "chip";
-        tag.textContent = isPrivate ? "私人空間" : site.tag;
-        top.appendChild(tag);
-      }
-
-      const desc = document.createElement("p");
-      desc.className = "card-desc";
-      desc.textContent = site.description || "";
-
-      content.appendChild(top);
-      content.appendChild(desc);
-
-      const actions = document.createElement("div");
-      actions.className = "card-actions";
-
-      if (site.url) {
-        const visitLink = document.createElement("a");
-        visitLink.className = "btn btn-forest";
-        visitLink.href = site.url;
-        visitLink.target = "_blank";
-        visitLink.rel = "noopener noreferrer";
-        visitLink.textContent = "前往網站";
-        actions.appendChild(visitLink);
-      }
-
-      if (site.repo) {
-        const repoLink = document.createElement("a");
-        repoLink.className = "btn";
-        repoLink.href = site.repo;
-        repoLink.target = "_blank";
-        repoLink.rel = "noopener noreferrer";
-        repoLink.textContent = "原始碼";
-        actions.appendChild(repoLink);
-      }
-
-      card.appendChild(content);
-      card.appendChild(actions);
-      return card;
-    }
-
-    function renderPublicSites() {
-      const grid = document.getElementById("public-grid");
-      const count = document.getElementById("public-count");
-      grid.innerHTML = "";
-      PUBLIC_SITES.forEach((site) => {
-        grid.appendChild(createSiteCard(site, false));
-      });
-      count.textContent = `目前收錄 ${PUBLIC_SITES.length} 項公開專案`;
-    }
 
     function fromBase64(b64) {
       const bin = atob(b64);
@@ -562,13 +496,8 @@
       if (!window.crypto || !window.crypto.subtle) {
         throw new Error("目前瀏覽環境不支援加密解密功能，請透過安全連線開啟。");
       }
-
       const enc = new TextEncoder();
       const dec = new TextDecoder();
-      const salt = fromBase64(ENCRYPTED_PRIVATE_DATA.salt);
-      const iv = fromBase64(ENCRYPTED_PRIVATE_DATA.iv);
-      const cipherBytes = fromBase64(ENCRYPTED_PRIVATE_DATA.data);
-
       const keyMaterial = await window.crypto.subtle.importKey(
         "raw",
         enc.encode(password),
@@ -576,73 +505,99 @@
         false,
         ["deriveKey"]
       );
-
       const key = await window.crypto.subtle.deriveKey(
-        { name: "PBKDF2", salt, iterations: 100000, hash: "SHA-256" },
+        {
+          name: "PBKDF2",
+          salt: fromBase64(ENCRYPTED_PRIVATE_DATA.salt),
+          iterations: 100000,
+          hash: "SHA-256"
+        },
         keyMaterial,
         { name: "AES-GCM", length: 256 },
         false,
         ["decrypt"]
       );
-
       const plainBuffer = await window.crypto.subtle.decrypt(
-        { name: "AES-GCM", iv },
+        { name: "AES-GCM", iv: fromBase64(ENCRYPTED_PRIVATE_DATA.iv) },
         key,
-        cipherBytes
+        fromBase64(ENCRYPTED_PRIVATE_DATA.data)
       );
-
       return JSON.parse(dec.decode(plainBuffer));
     }
 
-    const modal = document.getElementById("password-modal");
-    const openBtn = document.getElementById("open-private-btn");
-    const cancelBtn = document.getElementById("cancel-modal-btn");
-    const lockBtn = document.getElementById("lock-private-btn");
-    const unlockForm = document.getElementById("unlock-form");
-    const submitBtn = document.getElementById("submit-unlock-btn");
+    // 聯繫視窗
+    const contactModal = document.getElementById("contact-modal");
+    document.getElementById("open-contact-btn").addEventListener("click", () => {
+      contactModal.classList.add("open");
+    });
+    document.getElementById("close-contact-btn").addEventListener("click", () => {
+      contactModal.classList.remove("open");
+    });
+    contactModal.addEventListener("click", (e) => {
+      if (e.target === contactModal) contactModal.classList.remove("open");
+    });
+
+    // 私人空間密碼視窗
+    const pwdModal = document.getElementById("password-modal");
+    const openPrivateBtn = document.getElementById("open-private-btn");
+    const cancelPwdBtn = document.getElementById("cancel-pwd-btn");
+    const submitPwdBtn = document.getElementById("submit-pwd-btn");
     const passwordInput = document.getElementById("password-input");
     const errorEl = document.getElementById("unlock-error");
-    const privateSection = document.getElementById("private-section");
-    const privateGrid = document.getElementById("private-grid");
+    const unlockedBox = document.getElementById("private-unlocked");
 
-    function openModal() {
-      errorEl.textContent = "";
-      passwordInput.value = "";
-      modal.classList.add("open");
-      setTimeout(() => passwordInput.focus(), 60);
-    }
-
-    function closeModal() {
-      modal.classList.remove("open");
+    function closePwdModal() {
+      pwdModal.classList.remove("open");
       passwordInput.value = "";
       errorEl.textContent = "";
     }
 
-    openBtn.addEventListener("click", openModal);
-    cancelBtn.addEventListener("click", closeModal);
-    modal.addEventListener("click", (e) => {
-      if (e.target === modal) closeModal();
+    openPrivateBtn.addEventListener("click", () => {
+      errorEl.textContent = "";
+      passwordInput.value = "";
+      pwdModal.classList.add("open");
+      setTimeout(() => passwordInput.focus(), 50);
+    });
+    cancelPwdBtn.addEventListener("click", closePwdModal);
+    pwdModal.addEventListener("click", (e) => {
+      if (e.target === pwdModal) closePwdModal();
     });
 
-    lockBtn.addEventListener("click", () => {
-      privateGrid.innerHTML = "";
-      privateSection.classList.remove("active");
-    });
-
-    unlockForm.addEventListener("submit", async (e) => {
+    document.getElementById("unlock-form").addEventListener("submit", async (e) => {
       e.preventDefault();
       errorEl.textContent = "";
-      submitBtn.disabled = true;
-      submitBtn.textContent = "驗證中";
+      submitPwdBtn.disabled = true;
 
       try {
         const sites = await decryptPrivateSites(passwordInput.value);
-        privateGrid.innerHTML = "";
+        unlockedBox.innerHTML = "";
         sites.forEach((site) => {
-          privateGrid.appendChild(createSiteCard(site, true));
+          const row = document.createElement("div");
+          row.className = "private-link-row";
+
+          const link = document.createElement("a");
+          link.href = site.url;
+          link.target = "_blank";
+          link.rel = "noopener noreferrer";
+          link.textContent = `${site.name} →`;
+
+          const lockBtn = document.createElement("button");
+          lockBtn.className = "lock-btn";
+          lockBtn.type = "button";
+          lockBtn.textContent = "鎖定";
+          lockBtn.addEventListener("click", () => {
+            unlockedBox.innerHTML = "";
+            unlockedBox.classList.remove("open");
+            openPrivateBtn.style.display = "inline-flex";
+          });
+
+          row.appendChild(link);
+          row.appendChild(lockBtn);
+          unlockedBox.appendChild(row);
         });
-        privateSection.classList.add("active");
-        closeModal();
+        unlockedBox.classList.add("open");
+        openPrivateBtn.style.display = "none";
+        closePwdModal();
       } catch (err) {
         if (err && err.message && err.message.includes("加密解密")) {
           errorEl.textContent = err.message;
@@ -650,12 +605,9 @@
           errorEl.textContent = "密碼不正確，請重新確認。";
         }
       } finally {
-        submitBtn.disabled = false;
-        submitBtn.textContent = "解鎖";
+        submitPwdBtn.disabled = false;
       }
     });
-
-    renderPublicSites();
   </script>
 </body>
 </html>
