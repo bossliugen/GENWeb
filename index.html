@@ -53,17 +53,19 @@
       padding: 0 24px;
     }
 
-    /* 1. 原生 HTML/CSS 頂部橫幅導覽列（透明底色、無色差矩形） */
+    /* 1. 原生 HTML/CSS 頂部橫幅導覽列（真正置中 + 右側絕對定位聯繫） */
     header {
+      position: relative;
       display: flex;
       align-items: center;
-      gap: 24px;
+      justify-content: center;
       padding: 28px 0;
       background: transparent;
     }
 
     .banner-line-group {
-      flex: 1;
+      width: 100%;
+      padding: 0 56px;
       display: flex;
       align-items: center;
       gap: 20px;
@@ -100,6 +102,10 @@
     }
 
     .contact-trigger {
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
       background: none;
       border: none;
       font-family: var(--font-sans);
@@ -107,7 +113,6 @@
       color: var(--stone);
       cursor: pointer;
       padding: 4px 2px;
-      flex-shrink: 0;
       transition: color 150ms ease;
     }
 
@@ -173,11 +178,10 @@
     }
 
     .card-icon {
-      width: 48px;
-      height: 48px;
-      object-fit: contain;
+      height: 44px;
+      width: auto;
       display: block;
-      margin-bottom: 18px;
+      margin-bottom: 20px;
     }
 
     .card h2 {
@@ -214,10 +218,10 @@
 
     @media (max-width: 680px) {
       header {
-        gap: 14px;
         padding: 22px 0;
       }
       .banner-line-group {
+        padding: 0 44px;
         gap: 12px;
       }
       .gateways {
@@ -428,14 +432,23 @@
     <!-- 2. 置中品牌宣言 & 3. 兩張並排入口卡片 -->
     <main>
       <section class="statement">
-        <h1>安靜整理資訊，<br />做出真正實用的工具</h1>
+        <h1>安靜整理資訊，做出真正實用的工具</h1>
         <p>GEN. 代表對數據與日常工具的長期打磨，把繁雜的公開資料收斂成清晰的入口。</p>
       </section>
 
       <section class="gateways" aria-label="入口">
         <article class="card">
           <div>
-            <img src="used-cars-logo.jpg" alt="台灣中古車實價趨勢與世代資料庫" class="card-icon" />
+            <svg class="card-icon" viewBox="0 0 96 44" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <!-- Car roofline silhouette -->
+              <path d="M8 24H14C16 17 24 9 36 8H54C65 8 73 14 78 20L88 21.5C90.5 22 92 23.5 92 25.5" stroke="#1C1917" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" />
+              <path d="M25 18H67" stroke="#1C1917" stroke-width="1.5" stroke-linecap="round" opacity="0.45" />
+              <!-- Timeline with 3 nodes -->
+              <path d="M6 36H90" stroke="#1C1917" stroke-width="1.75" stroke-linecap="round" />
+              <circle cx="22" cy="36" r="3.5" fill="#FFFFFF" stroke="#1C1917" stroke-width="1.75" />
+              <circle cx="50" cy="36" r="3.5" fill="#FFFFFF" stroke="#1C1917" stroke-width="1.75" />
+              <circle cx="78" cy="36" r="4" fill="#1B4332" />
+            </svg>
             <h2>台灣中古車實價趨勢與世代資料庫</h2>
             <p>彙整台灣中古車實價走勢與車型世代沿革，提供買賣研究時清晰的公開查價參考。</p>
           </div>
@@ -449,7 +462,27 @@
 
         <article class="card">
           <div>
-            <img src="f1-logo.jpg" alt="GEN. — F1 比賽資料與遙測分析" class="card-icon" />
+            <svg class="card-icon" viewBox="0 0 96 44" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <!-- Rear wing (left) -->
+              <rect x="4" y="9" width="7" height="26" rx="1.5" stroke="#1C1917" stroke-width="1.75" />
+              <!-- Rear wheels -->
+              <rect x="16" y="4" width="14" height="8" rx="2.5" stroke="#1C1917" stroke-width="1.75" />
+              <rect x="16" y="32" width="14" height="8" rx="2.5" stroke="#1C1917" stroke-width="1.75" />
+              <!-- Front wheels -->
+              <rect x="64" y="5" width="13" height="7" rx="2.5" stroke="#1C1917" stroke-width="1.75" />
+              <rect x="64" y="32" width="13" height="7" rx="2.5" stroke="#1C1917" stroke-width="1.75" />
+              <!-- Suspension arms -->
+              <path d="M70.5 12V18M70.5 32V26M23 12V16M23 32V28" stroke="#1C1917" stroke-width="1.5" stroke-linecap="round" />
+              <!-- Body & nosecone pointing right -->
+              <path d="M11 19H26C32 14 44 14 52 17.5L84 20.5C86 21 86 23 84 23.5L52 26.5C44 30 32 30 26 25H11" stroke="#1C1917" stroke-width="1.75" stroke-linejoin="round" />
+              <!-- Cockpit -->
+              <ellipse cx="44" cy="22" rx="5.5" ry="3.2" stroke="#1C1917" stroke-width="1.5" />
+              <!-- Forest green aerodynamic sidepod accents -->
+              <path d="M35 15.5C39 14.5 44 14.8 48 16.5" stroke="#1B4332" stroke-width="2" stroke-linecap="round" />
+              <path d="M35 28.5C39 29.5 44 29.2 48 27.5" stroke="#1B4332" stroke-width="2" stroke-linecap="round" />
+              <!-- Front wing (right) -->
+              <path d="M84 8H90C91.5 8 92 9.5 92 12V32C92 34.5 91.5 36 90 36H84" stroke="#1C1917" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
             <h2>GEN. — F1 比賽資料與遙測分析</h2>
             <p>整理 F1 賽事數據、單圈遙測走勢與車手表現，提供賽後復盤與圈速比對的清晰視角。</p>
           </div>
