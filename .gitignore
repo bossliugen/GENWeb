@@ -1,0 +1,9 @@
+# 環境變數（含私人密碼與網址，絕對不可上傳到 Git）
+.env
+.env.*
+!.env.example
+
+# Node & 系統暫存檔
+node_modules/
+.DS_Store
+Thumbs.db

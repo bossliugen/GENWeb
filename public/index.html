@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>我的網站開發展示 | Project Showcase</title>
+  <style>
+    :root {
+      --bg: #0b1020;
+      --surface: #131a2e;
+      --surface-hover: #1a2340;
+      --border: rgba(255, 255, 255, 0.1);
+      --text: #eef2ff;
+      --muted: #94a3b8;
+      --accent: #6366f1;
+      --accent-hover: #818cf8;
+      --private: #f59e0b;
+      --radius: 14px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans TC", Roboto, sans-serif;
+      background: radial-gradient(circle at top right, #1e1b4b 0%, var(--bg) 55%);
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1060px;
+      margin: 0 auto;
+      padding: 32px 20px 64px;
+    }
+
+    header {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      padding-bottom: 28px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 36px;
+    }
+
+    .brand h1 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .brand p {
+      color: var(--muted);
+      font-size: 0.95rem;
+      margin-top: 4px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 16px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text);
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.18s ease, border-color 0.18s ease, transform 0.12s ease;
+    }
+
+    .btn:hover {
+      background: var(--surface-hover);
+      border-color: rgba(255, 255, 255, 0.22);
+    }
+
+    .btn:active {
+      transform: translateY(1px);
+    }
+
+    .btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      border-color: transparent;
+      color: #fff;
+    }
+
+    .btn-primary:hover:not(:disabled) {
+      background: var(--accent-hover);
+      border-color: transparent;
+    }
+
+    .btn-private {
+      border-color: rgba(245, 158, 11, 0.35);
+      color: #fcd34d;
+    }
+
+    .btn-private:hover {
+      background: rgba(245, 158, 11, 0.12);
+      border-color: rgba(245, 158, 11, 0.6);
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 18px;
+      gap: 12px;
+    }
+
+    .section-header h2 {
+      font-size: 1.2rem;
+      font-weight: 600;
+    }
+
+    .section-header span {
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 18px;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 16px;
+      transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(99, 102, 241, 0.45);
+      background: var(--surface-hover);
+    }
+
+    .card.private-card {
+      border-color: rgba(245, 158, 11, 0.28);
+    }
+
+    .card.private-card:hover {
+      border-color: rgba(245, 158, 11, 0.6);
+    }
+
+    .card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .card-title {
+      font-size: 1.08rem;
+      font-weight: 600;
+    }
+
+    .tag {
+      font-size: 0.75rem;
+      padding: 3px 9px;
+      border-radius: 999px;
+      background: rgba(99, 102, 241, 0.16);
+      color: #a5b4fc;
+      white-space: nowrap;
+    }
+
+    .tag.private-tag {
+      background: rgba(245, 158, 11, 0.16);
+      color: #fcd34d;
+    }
+
+    .card-desc {
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin-top: 8px;
+    }
+
+    .card-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .card-actions .btn {
+      padding: 7px 12px;
+      font-size: 0.85rem;
+    }
+
+    #private-section {
+      display: none;
+      margin-bottom: 42px;
+      padding: 22px;
+      border-radius: var(--radius);
+      background: rgba(245, 158, 11, 0.06);
+      border: 1px solid rgba(245, 158, 11, 0.3);
+    }
+
+    #private-section.active {
+      display: block;
+    }
+
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(5, 8, 18, 0.75);
+      backdrop-filter: blur(6px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      z-index: 100;
+    }
+
+    .modal-backdrop.open {
+      display: flex;
+    }
+
+    .modal {
+      width: 100%;
+      max-width: 420px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    }
+
+    .modal h3 {
+      font-size: 1.15rem;
+      margin-bottom: 6px;
+    }
+
+    .modal p {
+      color: var(--muted);
+      font-size: 0.88rem;
+      margin-bottom: 16px;
+    }
+
+    .input-group {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    input[type="password"] {
+      width: 100%;
+      padding: 11px 14px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: var(--bg);
+      color: var(--text);
+      font-size: 0.95rem;
+      outline: none;
+    }
+
+    input[type="password"]:focus {
+      border-color: var(--private);
+    }
+
+    .error-msg {
+      color: #fca5a5;
+      font-size: 0.85rem;
+      min-height: 20px;
+      margin-bottom: 10px;
+    }
+
+    .modal-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+    }
+
+    footer {
+      margin-top: 56px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 0.85rem;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="brand">
+        <h1>我的網站開發展示</h1>
+        <p>這裡收錄了我開發的公開網站與線上資料庫</p>
+      </div>
+      <button id="open-private-btn" class="btn btn-private" type="button">
+        🔒 私人入口
+      </button>
+    </header>
+
+    <!-- 伺服器驗證後才會動態載入的私人網站區塊 -->
+    <section id="private-section" aria-live="polite">
+      <div class="section-header">
+        <h2>🔓 私人未公開網站</h2>
+        <button id="lock-private-btn" class="btn" type="button">鎖定並隱藏</button>
+      </div>
+      <div id="private-grid" class="grid"></div>
+    </section>
+
+    <!-- 公開網站展示區塊 -->
+    <section>
+      <div class="section-header">
+        <h2>🌐 公開網站專案</h2>
+        <span id="public-count"></span>
+      </div>
+      <div id="public-grid" class="grid"></div>
+    </section>
+
+    <footer>
+      <span>Project Showcase</span>
+      <span>私人入口採伺服器端密碼驗證</span>
+    </footer>
+  </div>
+
+  <!-- 密碼輸入 Modal -->
+  <div id="password-modal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal">
+      <h3 id="modal-title">🔒 進入私人網站清單</h3>
+      <p>請輸入密碼，由伺服器驗證後取得私人網站連結。</p>
+      <form id="unlock-form">
+        <div class="input-group">
+          <input
+            id="password-input"
+            type="password"
+            placeholder="請輸入密碼..."
+            autocomplete="current-password"
+            required
+          />
+        </div>
+        <div id="unlock-error" class="error-msg"></div>
+        <div class="modal-actions">
+          <button id="cancel-modal-btn" class="btn" type="button">取消</button>
+          <button id="submit-unlock-btn" class="btn btn-primary" type="submit">解鎖</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // 公開網站清單（之後可隨時在這裡新增其他公開專案）
+    const PUBLIC_SITES = [
+      {
+        name: "台灣中古車實價趨勢與世代資料庫",
+        url: "https://bossliugen.github.io/Used_Cars9918/",
+        description: "提供台灣中古車實價趨勢查詢與各車型世代資料庫。",
+        tag: "Database"
+      }
+    ];
+
+    function createSiteCard(site, isPrivate = false) {
+      const card = document.createElement("article");
+      card.className = isPrivate ? "card private-card" : "card";
+
+      const top = document.createElement("div");
+      top.className = "card-top";
+
+      const title = document.createElement("h3");
+      title.className = "card-title";
+      title.textContent = site.name || "未命名網站";
+      top.appendChild(title);
+
+      if (site.tag) {
+        const tag = document.createElement("span");
+        tag.className = isPrivate ? "tag private-tag" : "tag";
+        tag.textContent = site.tag;
+        top.appendChild(tag);
+      }
+
+      const desc = document.createElement("p");
+      desc.className = "card-desc";
+      desc.textContent = site.description || "";
+
+      const body = document.createElement("div");
+      body.appendChild(top);
+      body.appendChild(desc);
+
+      const actions = document.createElement("div");
+      actions.className = "card-actions";
+
+      if (site.url) {
+        const visitLink = document.createElement("a");
+        visitLink.className = "btn btn-primary";
+        visitLink.href = site.url;
+        visitLink.target = "_blank";
+        visitLink.rel = "noopener noreferrer";
+        visitLink.textContent = "開啟網站 ↗";
+        actions.appendChild(visitLink);
+      }
+
+      if (site.repo) {
+        const repoLink = document.createElement("a");
+        repoLink.className = "btn";
+        repoLink.href = site.repo;
+        repoLink.target = "_blank";
+        repoLink.rel = "noopener noreferrer";
+        repoLink.textContent = "原始碼";
+        actions.appendChild(repoLink);
+      }
+
+      card.appendChild(body);
+      card.appendChild(actions);
+      return card;
+    }
+
+    function renderPublicSites() {
+      const grid = document.getElementById("public-grid");
+      const count = document.getElementById("public-count");
+      grid.innerHTML = "";
+      PUBLIC_SITES.forEach((site) => {
+        grid.appendChild(createSiteCard(site, false));
+      });
+      count.textContent = `共 ${PUBLIC_SITES.length} 個專案`;
+    }
+
+    const modal = document.getElementById("password-modal");
+    const openBtn = document.getElementById("open-private-btn");
+    const cancelBtn = document.getElementById("cancel-modal-btn");
+    const lockBtn = document.getElementById("lock-private-btn");
+    const unlockForm = document.getElementById("unlock-form");
+    const submitBtn = document.getElementById("submit-unlock-btn");
+    const passwordInput = document.getElementById("password-input");
+    const errorEl = document.getElementById("unlock-error");
+    const privateSection = document.getElementById("private-section");
+    const privateGrid = document.getElementById("private-grid");
+
+    function openModal() {
+      errorEl.textContent = "";
+      passwordInput.value = "";
+      modal.classList.add("open");
+      setTimeout(() => passwordInput.focus(), 50);
+    }
+
+    function closeModal() {
+      modal.classList.remove("open");
+      passwordInput.value = "";
+      errorEl.textContent = "";
+    }
+
+    openBtn.addEventListener("click", openModal);
+    cancelBtn.addEventListener("click", closeModal);
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) closeModal();
+    });
+
+    lockBtn.addEventListener("click", () => {
+      privateGrid.innerHTML = "";
+      privateSection.classList.remove("active");
+    });
+
+    unlockForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      errorEl.textContent = "";
+      submitBtn.disabled = true;
+      submitBtn.textContent = "驗證中...";
+
+      try {
+        const res = await fetch("/api/unlock", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ password: passwordInput.value })
+        });
+        const data = await res.json();
+
+        if (!res.ok || !data.ok) {
+          errorEl.textContent = data.error || "驗證失敗。";
+          return;
+        }
+
+        privateGrid.innerHTML = "";
+        (data.sites || []).forEach((site) => {
+          privateGrid.appendChild(createSiteCard(site, true));
+        });
+        privateSection.classList.add("active");
+        closeModal();
+      } catch {
+        errorEl.textContent = "無法連線到伺服器，請確認後端服務是否已啟動。";
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = "解鎖";
+      }
+    });
+
+    renderPublicSites();
+  </script>
+</body>
+</html>
