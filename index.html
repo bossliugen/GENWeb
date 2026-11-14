@@ -53,30 +53,38 @@
       padding: 0 24px;
     }
 
-    /* 1. 極簡頂部導覽列 */
+    /* 1. 極簡頂部導覽列（橫幅 LOGO 置中 + 右側聯繫） */
     header {
-      display: flex;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
       align-items: center;
-      justify-content: space-between;
-      padding: 28px 0;
+      gap: 16px;
+      padding: 22px 0;
       border-bottom: 1px solid var(--border);
+    }
+
+    .header-spacer {
+      display: block;
     }
 
     .wordmark {
       display: inline-flex;
       align-items: center;
+      justify-content: center;
       text-decoration: none;
     }
 
     .brand-logo {
-      height: 44px;
+      height: 46px;
       width: auto;
+      max-width: 100%;
+      object-fit: contain;
       display: block;
-      border-radius: 8px;
       mix-blend-mode: multiply;
     }
 
     .contact-trigger {
+      justify-self: end;
       background: none;
       border: none;
       font-family: var(--font-sans);
@@ -85,6 +93,21 @@
       cursor: pointer;
       padding: 4px 2px;
       text-decoration: none;
+    }
+
+    @media (max-width: 680px) {
+      header {
+        grid-template-columns: 1fr auto;
+      }
+      .header-spacer {
+        display: none;
+      }
+      .wordmark {
+        justify-content: flex-start;
+      }
+      .brand-logo {
+        height: 36px;
+      }
     }
 
     .contact-trigger:hover {
@@ -391,8 +414,9 @@
   <div class="shell">
     <!-- 1. 極簡頂部導覽列 -->
     <header>
+      <span class="header-spacer" aria-hidden="true"></span>
       <a class="wordmark" href="#" aria-label="HIBOSS GEN.">
-        <img src="logo.jpg" alt="GEN." class="brand-logo" />
+        <img src="banner-logo.png" alt="GEN." class="brand-logo" />
       </a>
       <button id="open-contact-btn" class="contact-trigger" type="button">聯繫</button>
     </header>
@@ -445,7 +469,7 @@
       <div class="footer-links">
         <a href="https://discord.gg/NdPzar4YAC" target="_blank" rel="noopener noreferrer">Discord</a>
         <a href="https://www.instagram.com/gen_cryptocurrency?dlrf=OGkza3ZoYm82ZjFs" target="_blank" rel="noopener noreferrer">Instagram</a>
-        <button id="open-private-btn" class="footer-eng-btn" type="button">工程模式</button>
+        <button id="open-private-btn" class="footer-eng-btn" type="button" style="display: none;">工程模式</button>
       </div>
     </footer>
   </div>
@@ -501,6 +525,35 @@
   </div>
 
   <script>
+    const ALLOWED_IP_HASHES = [
+      "7916508e275f6c10d4c3410a7bf6f51052f6c4c77f08c12a59d276c5c1f799c4"
+    ];
+
+    async function sha256Hex(text) {
+      const buf = await window.crypto.subtle.digest("SHA-256", new TextEncoder().encode(text));
+      return Array.from(new Uint8Array(buf))
+        .map((b) => b.toString(16).padStart(2, "0"))
+        .join("");
+    }
+
+    async function checkWhitelistedIp() {
+      if (!window.crypto || !window.crypto.subtle) return;
+      try {
+        const res = await fetch("https://api.ipify.org?format=json");
+        if (!res.ok) return;
+        const data = await res.json();
+        if (!data || !data.ip) return;
+        const hash = await sha256Hex(data.ip.trim());
+        if (ALLOWED_IP_HASHES.includes(hash)) {
+          document.getElementById("open-private-btn").style.display = "inline-block";
+        }
+      } catch {
+        // 非白名單或網路無法查詢時保持隱藏
+      }
+    }
+
+    checkWhitelistedIp();
+
     const ENCRYPTED_PRIVATE_DATA = {
       salt: "246sNVy/hAn+cZ8U8a362Q==",
       iv: "kXdmXRiCrpdZnblC",
