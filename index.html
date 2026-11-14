@@ -121,15 +121,15 @@
       color: var(--stone);
     }
 
-    /* 3. 公開入口卡片 */
+    /* 3. 公開入口卡片（雙欄並排） */
     .gateways {
-      display: flex;
-      justify-content: center;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 24px;
     }
 
     .card {
       width: 100%;
-      max-width: 540px;
       background-color: var(--card);
       border: 1px solid var(--border);
       border-radius: 16px;
@@ -197,6 +197,9 @@
     }
 
     @media (max-width: 680px) {
+      .gateways {
+        grid-template-columns: 1fr;
+      }
       main {
         padding: 44px 0;
       }
@@ -413,6 +416,22 @@
           <a
             class="card-action"
             href="https://bossliugen.github.io/Used_Cars9918/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >進入平台 →</a>
+        </article>
+
+        <article class="card">
+          <div>
+            <div class="card-logo-wrap">
+              <img src="f1-logo.jpg" alt="GEN. — F1 比賽資料與遙測分析" class="card-logo" />
+            </div>
+            <h2>GEN. — F1 比賽資料與遙測分析</h2>
+            <p>整理 F1 賽事數據、單圈遙測走勢與車手表現，提供賽後復盤與圈速比對的清晰視角。</p>
+          </div>
+          <a
+            class="card-action"
+            href="https://bossliugen.github.io/GEWEB-F1/"
             target="_blank"
             rel="noopener noreferrer"
           >進入平台 →</a>
