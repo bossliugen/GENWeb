@@ -47,7 +47,7 @@
 
     .container {
       width: 100%;
-      max-width: 960px;
+      max-width: 1080px;
       margin: 0 auto;
       padding: 0 24px;
     }
@@ -195,7 +195,7 @@
 
     .gateways {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 24px;
     }
 
@@ -219,6 +219,10 @@
 
     .card:nth-child(2) {
       transition-delay: 120ms, 120ms, 0ms;
+    }
+
+    .card:nth-child(3) {
+      transition-delay: 240ms, 240ms, 0ms;
     }
 
     .card.is-visible {
@@ -269,7 +273,7 @@
       text-underline-offset: 4px;
     }
 
-    @media (max-width: 680px) {
+    @media (max-width: 860px) {
       .banner-line-group {
         gap: 12px;
       }
@@ -597,6 +601,25 @@
           <a
             class="card-action"
             href="https://bossliugen.github.io/GEWEB-F1/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >進入平台 →</a>
+        </article>
+
+        <article class="card">
+          <div>
+            <svg class="card-icon" viewBox="0 0 96 44" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <rect x="3" y="8" width="28" height="28" rx="6" stroke="#1C1917" stroke-width="1.75" />
+              <path d="M31 22H39L43 16L48 31L53 12L57 22H65" stroke="#1C1917" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" />
+              <rect x="65" y="8" width="28" height="28" rx="6" stroke="#1C1917" stroke-width="1.75" />
+              <circle cx="85" cy="15.5" r="3" fill="#1B4332" />
+            </svg>
+            <h2>GEN. — 鏈上資金動態與大戶異常監測系統</h2>
+            <p>即時追蹤鏈上大戶錢包流向與異常資金脈衝，將複雜的區塊鏈交易轉化為直覺的監測指標。</p>
+          </div>
+          <a
+            class="card-action"
+            href="https://bossliugen.github.io/block_Tracking/"
             target="_blank"
             rel="noopener noreferrer"
           >進入平台 →</a>
