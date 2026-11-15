@@ -195,7 +195,7 @@
 
     .gateways {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 24px;
     }
 
@@ -223,6 +223,10 @@
 
     .card:nth-child(3) {
       transition-delay: 240ms, 240ms, 0ms;
+    }
+
+    .card:nth-child(4) {
+      transition-delay: 360ms, 360ms, 0ms;
     }
 
     .card.is-visible {
@@ -618,6 +622,22 @@
             href="https://bossliugen.github.io/block_Tracking/"
           >進入平台 →</a>
         </article>
+
+        <article class="card">
+          <div>
+            <svg class="card-icon" viewBox="0 0 96 44" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <rect x="6" y="7" width="60" height="30" rx="8" stroke="#1C1917" stroke-width="1.75" />
+              <path d="M31 16L43 22L31 28V16Z" fill="#1B4332" />
+              <path d="M74 16H90M74 22H86M74 28H82" stroke="#1C1917" stroke-width="1.75" stroke-linecap="round" />
+            </svg>
+            <h2>GEN. — YouTube 頻道</h2>
+            <p>分享網站開發實作、數據工具演示與影音紀錄，整理成方便隨時回看的影片內容。</p>
+          </div>
+          <a
+            class="card-action"
+            href="https://www.youtube.com/channel/UC9vw9-i6Sgr1xZv1-2PwgDQ"
+          >前往頻道 →</a>
+        </article>
       </section>
     </main>
 
@@ -625,6 +645,7 @@
     <footer>
       <span>© 2026 HIBOSS GEN. · 台灣</span>
       <div class="footer-links">
+        <a href="https://www.youtube.com/channel/UC9vw9-i6Sgr1xZv1-2PwgDQ" target="_blank" rel="noopener noreferrer">YouTube</a>
         <a href="https://discord.gg/NdPzar4YAC" target="_blank" rel="noopener noreferrer">Discord</a>
         <a href="https://www.instagram.com/gen_cryptocurrency?dlrf=OGkza3ZoYm82ZjFs" target="_blank" rel="noopener noreferrer">Instagram</a>
         <button id="open-private-btn" class="footer-eng-btn" type="button" style="display: none;">工程模式</button>
@@ -638,6 +659,10 @@
       <h3 id="contact-title">聯繫方式</h3>
       <p>歡迎透過以下社群管道交流與聯繫。</p>
       <div class="contact-list">
+        <a class="contact-item" href="https://www.youtube.com/channel/UC9vw9-i6Sgr1xZv1-2PwgDQ" target="_blank" rel="noopener noreferrer">
+          <strong>YouTube</strong>
+          <span>前往頻道 →</span>
+        </a>
         <a class="contact-item" href="https://discord.gg/NdPzar4YAC" target="_blank" rel="noopener noreferrer">
           <strong>Discord</strong>
           <span>前往加入 →</span>
