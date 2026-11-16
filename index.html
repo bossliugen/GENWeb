@@ -238,11 +238,28 @@
       border-color: var(--border-hover);
     }
 
+    .card-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+
     .card-icon {
       height: 44px;
       width: auto;
       display: block;
-      margin-bottom: 20px;
+    }
+
+    .card-index {
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      color: var(--stone);
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap;
+      padding-top: 2px;
     }
 
     .card h2 {
@@ -565,14 +582,17 @@
       <section class="gateways" aria-label="入口">
         <article class="card">
           <div>
-            <svg class="card-icon" viewBox="0 0 96 44" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <path d="M8 24H14C16 17 24 9 36 8H54C65 8 73 14 78 20L88 21.5C90.5 22 92 23.5 92 25.5" stroke="#1C1917" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" />
-              <path d="M25 18H67" stroke="#1C1917" stroke-width="1.5" stroke-linecap="round" opacity="0.45" />
-              <path d="M6 36H90" stroke="#1C1917" stroke-width="1.75" stroke-linecap="round" />
-              <circle cx="22" cy="36" r="3.5" fill="#FFFFFF" stroke="#1C1917" stroke-width="1.75" />
-              <circle cx="50" cy="36" r="3.5" fill="#FFFFFF" stroke="#1C1917" stroke-width="1.75" />
-              <circle cx="78" cy="36" r="4" fill="#1B4332" />
-            </svg>
+            <div class="card-header">
+              <svg class="card-icon" viewBox="0 0 96 44" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M8 24H14C16 17 24 9 36 8H54C65 8 73 14 78 20L88 21.5C90.5 22 92 23.5 92 25.5" stroke="#1C1917" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M25 18H67" stroke="#1C1917" stroke-width="1.5" stroke-linecap="round" opacity="0.45" />
+                <path d="M6 36H90" stroke="#1C1917" stroke-width="1.75" stroke-linecap="round" />
+                <circle cx="22" cy="36" r="3.5" fill="#FFFFFF" stroke="#1C1917" stroke-width="1.75" />
+                <circle cx="50" cy="36" r="3.5" fill="#FFFFFF" stroke="#1C1917" stroke-width="1.75" />
+                <circle cx="78" cy="36" r="4" fill="#1B4332" />
+              </svg>
+              <span class="card-index">01 / 台灣中古車實價</span>
+            </div>
             <h2>台灣中古車實價趨勢與世代資料庫</h2>
             <p>彙整台灣中古車實價走勢與車型世代沿革，提供買賣研究時清晰的公開查價參考。</p>
           </div>
@@ -584,19 +604,22 @@
 
         <article class="card">
           <div>
-            <svg class="card-icon" viewBox="0 0 96 44" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <rect x="4" y="9" width="7" height="26" rx="1.5" stroke="#1C1917" stroke-width="1.75" />
-              <rect x="16" y="4" width="14" height="8" rx="2.5" stroke="#1C1917" stroke-width="1.75" />
-              <rect x="16" y="32" width="14" height="8" rx="2.5" stroke="#1C1917" stroke-width="1.75" />
-              <rect x="64" y="5" width="13" height="7" rx="2.5" stroke="#1C1917" stroke-width="1.75" />
-              <rect x="64" y="32" width="13" height="7" rx="2.5" stroke="#1C1917" stroke-width="1.75" />
-              <path d="M70.5 12V18M70.5 32V26M23 12V16M23 32V28" stroke="#1C1917" stroke-width="1.5" stroke-linecap="round" />
-              <path d="M11 19H26C32 14 44 14 52 17.5L84 20.5C86 21 86 23 84 23.5L52 26.5C44 30 32 30 26 25H11" stroke="#1C1917" stroke-width="1.75" stroke-linejoin="round" />
-              <ellipse cx="44" cy="22" rx="5.5" ry="3.2" stroke="#1C1917" stroke-width="1.5" />
-              <path d="M35 15.5C39 14.5 44 14.8 48 16.5" stroke="#1B4332" stroke-width="2" stroke-linecap="round" />
-              <path d="M35 28.5C39 29.5 44 29.2 48 27.5" stroke="#1B4332" stroke-width="2" stroke-linecap="round" />
-              <path d="M84 8H90C91.5 8 92 9.5 92 12V32C92 34.5 91.5 36 90 36H84" stroke="#1C1917" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" />
-            </svg>
+            <div class="card-header">
+              <svg class="card-icon" viewBox="0 0 96 44" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <rect x="4" y="9" width="7" height="26" rx="1.5" stroke="#1C1917" stroke-width="1.75" />
+                <rect x="16" y="4" width="14" height="8" rx="2.5" stroke="#1C1917" stroke-width="1.75" />
+                <rect x="16" y="32" width="14" height="8" rx="2.5" stroke="#1C1917" stroke-width="1.75" />
+                <rect x="64" y="5" width="13" height="7" rx="2.5" stroke="#1C1917" stroke-width="1.75" />
+                <rect x="64" y="32" width="13" height="7" rx="2.5" stroke="#1C1917" stroke-width="1.75" />
+                <path d="M70.5 12V18M70.5 32V26M23 12V16M23 32V28" stroke="#1C1917" stroke-width="1.5" stroke-linecap="round" />
+                <path d="M11 19H26C32 14 44 14 52 17.5L84 20.5C86 21 86 23 84 23.5L52 26.5C44 30 32 30 26 25H11" stroke="#1C1917" stroke-width="1.75" stroke-linejoin="round" />
+                <ellipse cx="44" cy="22" rx="5.5" ry="3.2" stroke="#1C1917" stroke-width="1.5" />
+                <path d="M35 15.5C39 14.5 44 14.8 48 16.5" stroke="#1B4332" stroke-width="2" stroke-linecap="round" />
+                <path d="M35 28.5C39 29.5 44 29.2 48 27.5" stroke="#1B4332" stroke-width="2" stroke-linecap="round" />
+                <path d="M84 8H90C91.5 8 92 9.5 92 12V32C92 34.5 91.5 36 90 36H84" stroke="#1C1917" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+              <span class="card-index">02 / F1 賽道遙測</span>
+            </div>
             <h2>GEN. — F1 比賽資料與遙測分析</h2>
             <p>整理 F1 賽事數據、單圈遙測走勢與車手表現，提供賽後復盤與圈速比對的清晰視角。</p>
           </div>
@@ -608,12 +631,15 @@
 
         <article class="card">
           <div>
-            <svg class="card-icon" viewBox="0 0 96 44" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <rect x="3" y="8" width="28" height="28" rx="6" stroke="#1C1917" stroke-width="1.75" />
-              <path d="M31 22H39L43 16L48 31L53 12L57 22H65" stroke="#1C1917" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" />
-              <rect x="65" y="8" width="28" height="28" rx="6" stroke="#1C1917" stroke-width="1.75" />
-              <circle cx="85" cy="15.5" r="3" fill="#1B4332" />
-            </svg>
+            <div class="card-header">
+              <svg class="card-icon" viewBox="0 0 96 44" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <rect x="3" y="8" width="28" height="28" rx="6" stroke="#1C1917" stroke-width="1.75" />
+                <path d="M31 22H39L43 16L48 31L53 12L57 22H65" stroke="#1C1917" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" />
+                <rect x="65" y="8" width="28" height="28" rx="6" stroke="#1C1917" stroke-width="1.75" />
+                <circle cx="85" cy="15.5" r="3" fill="#1B4332" />
+              </svg>
+              <span class="card-index">03 / 鏈上資金監測</span>
+            </div>
             <h2>GEN. — 鏈上資金動態與大戶異常監測系統</h2>
             <p>即時追蹤鏈上大戶錢包流向與異常資金脈衝，將複雜的區塊鏈交易轉化為直覺的監測指標。</p>
           </div>
@@ -625,11 +651,14 @@
 
         <article class="card">
           <div>
-            <svg class="card-icon" viewBox="0 0 96 44" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <rect x="6" y="7" width="60" height="30" rx="8" stroke="#1C1917" stroke-width="1.75" />
-              <path d="M31 16L43 22L31 28V16Z" fill="#1B4332" />
-              <path d="M74 16H90M74 22H86M74 28H82" stroke="#1C1917" stroke-width="1.75" stroke-linecap="round" />
-            </svg>
+            <div class="card-header">
+              <svg class="card-icon" viewBox="0 0 96 44" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <rect x="6" y="7" width="60" height="30" rx="8" stroke="#1C1917" stroke-width="1.75" />
+                <path d="M31 16L43 22L31 28V16Z" fill="#1B4332" />
+                <path d="M74 16H90M74 22H86M74 28H82" stroke="#1C1917" stroke-width="1.75" stroke-linecap="round" />
+              </svg>
+              <span class="card-index">04 / YouTube 開發與財經</span>
+            </div>
             <h2>GEN. — YouTube 頻道</h2>
             <p>分享網站開發實作、數據工具演示與影音紀錄，整理成方便隨時回看的影片內容。</p>
           </div>
@@ -647,7 +676,7 @@
       <div class="footer-links">
         <a href="https://www.youtube.com/channel/UC9vw9-i6Sgr1xZv1-2PwgDQ" target="_blank" rel="noopener noreferrer">YouTube</a>
         <a href="https://discord.gg/NdPzar4YAC" target="_blank" rel="noopener noreferrer">Discord</a>
-        <a href="https://www.instagram.com/gen_cryptocurrency?dlrf=OGkza3ZoYm82ZjFs" target="_blank" rel="noopener noreferrer">Instagram</a>
+        <a href="https://www.instagram.com/hiboss.gen/" target="_blank" rel="noopener noreferrer">Instagram</a>
         <button id="open-private-btn" class="footer-eng-btn" type="button" style="display: none;">工程模式</button>
       </div>
     </footer>
@@ -667,8 +696,8 @@
           <strong>Discord</strong>
           <span>前往加入 →</span>
         </a>
-        <a class="contact-item" href="https://www.instagram.com/gen_cryptocurrency?dlrf=OGkza3ZoYm82ZjFs" target="_blank" rel="noopener noreferrer">
-          <strong>Instagram</strong>
+        <a class="contact-item" href="https://www.instagram.com/hiboss.gen/" target="_blank" rel="noopener noreferrer">
+          <strong>Instagram · @hiboss.gen</strong>
           <span>前往追蹤 →</span>
         </a>
       </div>
